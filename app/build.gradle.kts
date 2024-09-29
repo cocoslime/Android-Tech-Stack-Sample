@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.cocoslime.NavigateSample"
+    namespace = "com.cocoslime.navigation"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.cocoslime.NavigateSample"
+        applicationId = "com.cocoslime.navigation"
         minSdk = 27
         targetSdk = 34
         versionCode = 1
@@ -33,14 +33,23 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        compose = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.androidxCompose.get()
+    }
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+
+    // compose
+    implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.compose.ui)
+    implementation(libs.androidx.compose.runtime)
+    implementation(libs.androidx.compose.foundation)
+    implementation(libs.androidx.compose.material3)
 }
