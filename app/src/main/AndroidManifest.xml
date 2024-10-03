@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AndroidNavigationSample"
+        android:theme="@style/Theme.PresentationSampleArchive"
         tools:targetApi="31" >
 
         <activity
@@ -25,7 +25,7 @@
         </activity>
 
         <activity
-            android:name=".activity.DestinationActivity"
+            android:name="com.cocoslime.presentation.navigation.activity.DestinationNavActivity"
             android:exported="false" />
     </application>
 

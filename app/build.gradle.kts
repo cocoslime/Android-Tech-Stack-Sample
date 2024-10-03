@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.cocoslime.navigation"
+    namespace = "com.cocoslime.presentation"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.cocoslime.navigation"
+        applicationId = "com.cocoslime.presentation"
         minSdk = 27
         targetSdk = 34
         versionCode = 1
@@ -47,10 +47,16 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)
 
-    // compose
     implementation(libs.androidx.activity.compose)
+
+    // compose
+    val composeBom = platform(libs.androidx.compose.bom)
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.ui.tooling.preview)
+    debugImplementation(libs.androidx.compose.ui.tooling)
 }

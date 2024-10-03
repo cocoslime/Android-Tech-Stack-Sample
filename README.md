@@ -1,6 +1,10 @@
-# Navigation Sample
+# Presentation Sample Archive
 
-Android project 에서 화면 간 이동을 구현하는 여러 가지 Navigation 코드에 대한 샘플 프로젝트 입니다.
+Android Application 의 Presentation Layer(UI Layer) 에 대한 샘플 코드 모음 Repository 입니다. 
+
+# Navigation
+
+화면 간 이동을 구현하는 Navigation 코드 모음
 
 ```
 MainActivity
