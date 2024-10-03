@@ -24,8 +24,15 @@
             </intent-filter>
         </activity>
 
+        <!-- Navigation -->
         <activity
-            android:name="com.cocoslime.presentation.navigation.activity.DestinationNavActivity"
+            android:name=".navigation.NavigationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".navigation.activity.SourceNavActivity"
+            android:exported="false" />
+        <activity
+            android:name=".navigation.activity.DestinationNavActivity"
             android:exported="false" />
     </application>
 

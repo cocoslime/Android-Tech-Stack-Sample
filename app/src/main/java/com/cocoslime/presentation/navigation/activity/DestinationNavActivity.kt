@@ -1,4 +1,4 @@
-package com.cocoslime.navigation.activity
+package com.cocoslime.presentation.navigation.activity
 
 import android.os.Build
 import android.os.Build.VERSION_CODES
@@ -7,17 +7,19 @@ import android.os.Parcelable
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.cocoslime.navigation.screen.DestinationScreen
+import androidx.compose.ui.res.stringResource
+import com.cocoslime.presentation.R
+import com.cocoslime.presentation.screen.CommonScreen
 import kotlinx.parcelize.Parcelize
 
-class DestinationActivity: ComponentActivity() {
+class DestinationNavActivity: ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setResult(RESULT_CANCELED)
 
-        val title = if (Build.VERSION.SDK_INT >= VERSION_CODES.TIRAMISU) {
+        val requestMessage = if (Build.VERSION.SDK_INT >= VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra(
                 RequestData.EXTRA_KEY,
                 RequestData::class.java
@@ -25,11 +27,13 @@ class DestinationActivity: ComponentActivity() {
         } else {
             intent.getParcelableExtra<RequestData>(RequestData.EXTRA_KEY)
         }
-            ?.title
+            ?.message
 
         setContent {
-            DestinationScreen(
-                title = title.orEmpty()
+            CommonScreen(
+                title = this@DestinationNavActivity::class.simpleName.orEmpty(),
+                message = requestMessage.orEmpty(),
+                confirmButtonText = stringResource(id = R.string.prev_button_text)
             ) {
                 setResult(
                     RESULT_OK,
@@ -42,7 +46,7 @@ class DestinationActivity: ComponentActivity() {
 
     @Parcelize
     data class RequestData(
-        val title: String
+        val message: String
     ): Parcelable {
 
         companion object {
