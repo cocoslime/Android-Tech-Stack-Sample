@@ -6,6 +6,7 @@ junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
+serialization = "1.6.3"
 material = "1.12.0"
 androidxActivity = "1.9.1"
 androidxComposeBom = "2024.04.00"
@@ -13,7 +14,7 @@ androidxComposeCompiler = "1.5.4" # kotlinCompilerExtensionVersion
 
 hilt = "2.52"
 androidxLifecycle = "2.8.4"
-androidxNavigation = "2.8.0-beta07"
+androidxNavigation = "2.8.0"
 androidxHiltNavigationCompose = "1.2.0"
 
 [libraries]
@@ -42,8 +43,11 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 

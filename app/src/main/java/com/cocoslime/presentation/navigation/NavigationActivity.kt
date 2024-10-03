@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.cocoslime.presentation.navigation.activity.SourceNavActivity
+import com.cocoslime.presentation.navigation.compose.ComposeNavActivity
 
 class NavigationActivity : ComponentActivity() {
 
@@ -37,21 +38,37 @@ class NavigationActivity : ComponentActivity() {
             verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Button(
-                onClick = {
-                    startActivity(
-                        Intent(
-                            this@NavigationActivity,
-                            SourceNavActivity::class.java
-                        )
+            RouteButton(
+                clazz = SourceNavActivity::class.java,
+                buttonText = "Activity -> Activity"
+            )
+
+            RouteButton(
+                clazz = ComposeNavActivity::class.java,
+                buttonText = "Compose NavHost"
+            )
+        }
+    }
+
+    @Composable
+    fun <T> RouteButton(
+        clazz: Class<T>,
+        buttonText: String
+    ) {
+        Button(
+            onClick = {
+                startActivity(
+                    Intent(
+                        this@NavigationActivity,
+                        clazz
                     )
-                },
-            ) {
-                Text(
-                    "Activity -> Activity",
-                    style = MaterialTheme.typography.labelLarge
                 )
-            }
+            },
+        ) {
+            Text(
+                buttonText,
+                style = MaterialTheme.typography.labelLarge
+            )
         }
     }
 }

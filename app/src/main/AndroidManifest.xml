@@ -34,6 +34,9 @@
         <activity
             android:name=".navigation.activity.DestinationNavActivity"
             android:exported="false" />
+        <activity
+            android:name=".navigation.compose.ComposeNavActivity"
+            android:exported="false" />
     </application>
 
 
