@@ -25,4 +25,9 @@ class ComposeMainRoute {
             val DEFAULT = DestinationResult("")
         }
     }
+
+    @Serializable
+    data class OtherDestinationArgs(
+        val message: String
+    )
 }
