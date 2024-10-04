@@ -12,7 +12,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.cocoslime.presentation.R
 import com.cocoslime.presentation.screen.CommonScreen
-import kotlinx.coroutines.flow.onEach
 
 @Composable
 fun ComposeMainNavHost() {
@@ -28,9 +27,6 @@ fun ComposeMainNavHost() {
                 ComposeMainRoute.DestinationResult.KEY,
                 ComposeMainRoute.DestinationResult.DEFAULT
             )
-                .onEach {
-                    println(it)
-                }
                 .collectAsState(
                     initial = ComposeMainRoute.DestinationResult.DEFAULT
                 )
