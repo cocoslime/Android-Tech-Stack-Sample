@@ -27,43 +27,38 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun CommonScreen(
+fun CommonSection(
     title: String,
     message: String,
+    isTextFieldVisible: Boolean,
     confirmButtonText: String,
-    onConfirmClick: (String) -> Unit
+    modifier: Modifier = Modifier,
+    onConfirmClick: (String) -> Unit = {}
 ) {
     var state by remember {
         mutableStateOf("")
     }
 
-    Scaffold(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(
-                color = Color.LightGray
-            )
-    ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(paddingValues)
-                .padding(vertical = 8.dp, horizontal = 16.dp)
-        ) {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.titleMedium
-            )
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp, horizontal = 16.dp)
+    ) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.titleMedium
+        )
 
-            Spacer(modifier = Modifier.height(6.dp))
+        Spacer(modifier = Modifier.height(6.dp))
 
-            Text(
-                text = message,
-                style = MaterialTheme.typography.headlineMedium
-            )
+        Text(
+            text = message,
+            style = MaterialTheme.typography.headlineMedium
+        )
 
-            Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
+        if (isTextFieldVisible) {
             TextField(
                 value = state,
                 onValueChange = {
@@ -72,14 +67,14 @@ fun CommonScreen(
                 modifier = Modifier
                     .fillMaxWidth()
             )
+        }
 
-            Button(
-                onClick = {
-                    onConfirmClick(state)
-                }
-            ) {
-                Text(confirmButtonText)
+        Button(
+            onClick = {
+                onConfirmClick(state)
             }
+        ) {
+            Text(confirmButtonText)
         }
     }
 }
@@ -95,10 +90,11 @@ private fun getStatusBarHeight(): Dp {
 @Composable
 private fun CommonScreenPreview() {
     MaterialTheme {
-        CommonScreen(
+        CommonSection(
             title = "Title",
             message = "Message",
             confirmButtonText = "Confirm",
+            isTextFieldVisible = true,
             onConfirmClick = {}
         )
     }

@@ -7,12 +7,16 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.cocoslime.presentation.R
-import com.cocoslime.presentation.screen.CommonScreen
+import com.cocoslime.presentation.screen.CommonSection
 
 class SourceNavActivity : ComponentActivity() {
 
@@ -39,23 +43,32 @@ class SourceNavActivity : ComponentActivity() {
             val resultFromDestination by resultFromDestinationActivity
 
             MaterialTheme {
-                CommonScreen(
-                    title = this::class.simpleName.orEmpty(),
-                    message = resultFromDestination,
-                    confirmButtonText = stringResource(id = R.string.next_button_text)
-                ) { requestMessage ->
-                    destinationActivity.launch(
-                        Intent(
-                            this@SourceNavActivity,
-                            DestinationNavActivity::class.java
+                Scaffold(
+                    modifier = Modifier.fillMaxSize()
+                ) { paddingValues ->
+
+                    CommonSection(
+                        title = this::class.simpleName.orEmpty(),
+                        message = resultFromDestination,
+                        isTextFieldVisible = true,
+                        modifier = Modifier
+                            .padding(paddingValues)
+                            .fillMaxSize(),
+                        confirmButtonText = stringResource(id = R.string.next_button_text)
+                    ) { requestMessage ->
+                        destinationActivity.launch(
+                            Intent(
+                                this@SourceNavActivity,
+                                DestinationNavActivity::class.java
+                            )
+                                .apply {
+                                    putExtra(
+                                        DestinationNavActivity.RequestData.EXTRA_KEY,
+                                        DestinationNavActivity.RequestData(requestMessage)
+                                    )
+                                }
                         )
-                            .apply {
-                                putExtra(
-                                    DestinationNavActivity.RequestData.EXTRA_KEY,
-                                    DestinationNavActivity.RequestData(requestMessage)
-                                )
-                            }
-                    )
+                    }
                 }
             }
         }

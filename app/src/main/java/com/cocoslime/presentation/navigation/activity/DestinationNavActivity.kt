@@ -7,9 +7,13 @@ import android.os.Parcelable
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.cocoslime.presentation.R
-import com.cocoslime.presentation.screen.CommonScreen
+import com.cocoslime.presentation.screen.CommonSection
 import kotlinx.parcelize.Parcelize
 
 class DestinationNavActivity: ComponentActivity() {
@@ -30,16 +34,25 @@ class DestinationNavActivity: ComponentActivity() {
             ?.message
 
         setContent {
-            CommonScreen(
-                title = this@DestinationNavActivity::class.simpleName.orEmpty(),
-                message = requestMessage.orEmpty(),
-                confirmButtonText = stringResource(id = R.string.prev_button_text)
-            ) {
-                setResult(
-                    RESULT_OK,
-                    intent.putExtra(ResultData.EXTRA_KEY, ResultData(it))
-                )
-                finish()
+            Scaffold(
+                modifier = Modifier.fillMaxSize()
+            ) { paddingValues ->
+
+                CommonSection(
+                    title = this@DestinationNavActivity::class.simpleName.orEmpty(),
+                    message = requestMessage.orEmpty(),
+                    isTextFieldVisible = true,
+                    modifier = Modifier
+                        .padding(paddingValues)
+                        .fillMaxSize(),
+                    confirmButtonText = stringResource(id = R.string.prev_button_text),
+                ) {
+                    setResult(
+                        RESULT_OK,
+                        intent.putExtra(ResultData.EXTRA_KEY, ResultData(it))
+                    )
+                    finish()
+                }
             }
         }
     }
