@@ -8,6 +8,8 @@ import androidx.fragment.app.FragmentActivity
 import androidx.navigation.createGraph
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.fragment
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 import com.cocoslime.presentation.R
 import com.cocoslime.presentation.databinding.ActivityFragmentNavBinding
 
