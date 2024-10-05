@@ -1,15 +1,16 @@
 package com.cocoslime.presentation.navigation.compose
 
 import android.os.Parcelable
+import androidx.annotation.Keep
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
 
 class ComposeMainRoute {
-
+    @Keep
     @Serializable
     object Source
 
-
+    @Keep
     @Serializable
     data class DestinationArgs(
         val message: String
@@ -26,6 +27,7 @@ class ComposeMainRoute {
         }
     }
 
+    @Keep
     @Serializable
     data class OtherDestinationArgs(
         val message: String
