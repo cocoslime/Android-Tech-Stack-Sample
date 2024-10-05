@@ -14,6 +14,12 @@ and [DestinationActivity](https://github.com/cocoslime/Android-Navigation-Sample
 ### [Navigate between Composable](https://developer.android.com/develop/ui/compose/navigation)
 - See [navigation.compose package](https://github.com/cocoslime/Android-Navigation-Sample/blob/master/app/src/main/java/com/cocoslime/presentation/navigation/compose) code.
 - Compose Navigation 에서 Destination 간에 데이터 전달: [Type Safe Navigation](https://developer.android.com/guide/navigation/design/type-safety)
+- Type-Safe Navigation
+
+### Fragment -> Fragment
+- See [navigation.fragment package](https://github.com/cocoslime/Android-Navigation-Sample/blob/master/app/src/main/java/com/cocoslime/presentation/navigation/fragment) code.
+- [Fragments and the Kotlin DSL](https://developer.android.com/guide/navigation/design/kotlin-dsl#navigate)
+- Type-Safe Navigation
 
 ## Dependencies
 - Navigation
