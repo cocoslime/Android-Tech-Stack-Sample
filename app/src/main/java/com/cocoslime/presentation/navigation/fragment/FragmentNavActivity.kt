@@ -52,7 +52,9 @@ class FragmentNavActivity : FragmentActivity() {
             fragment<DestinationFragment, FragmentNavRoute.DestinationArgs> {
                 label = getString(R.string.destination_screen_title)
             }
-            //TODO: ViewModelFragment
+            fragment<VmDestinationFragment, FragmentNavRoute.VmDestinationArgs>() {
+                label = getString(R.string.other_destination_screen_title)
+            }
         }
 
 
