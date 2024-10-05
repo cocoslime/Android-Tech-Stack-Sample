@@ -7,13 +7,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.cocoslime.presentation.R
-import com.cocoslime.presentation.screen.CommonSection
+import com.cocoslime.presentation.common.CommonSection
 
 @Composable
 fun ComposeMainNavHost() {
