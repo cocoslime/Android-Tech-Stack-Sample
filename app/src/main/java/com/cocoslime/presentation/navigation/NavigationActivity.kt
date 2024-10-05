@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.cocoslime.presentation.navigation.activity.SourceNavActivity
 import com.cocoslime.presentation.navigation.compose.ComposeNavActivity
+import com.cocoslime.presentation.navigation.fragment.FragmentNavActivity
 
 class NavigationActivity : ComponentActivity() {
 
@@ -46,6 +47,11 @@ class NavigationActivity : ComponentActivity() {
             RouteButton(
                 clazz = ComposeNavActivity::class.java,
                 buttonText = "Compose NavHost"
+            )
+
+            RouteButton(
+                clazz = FragmentNavActivity::class.java,
+                buttonText = "Fragment NavHost"
             )
         }
     }
