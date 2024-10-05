@@ -37,10 +37,11 @@ android {
     }
     buildFeatures {
         compose = true
+        viewBinding = true
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.androidxComposeCompiler.get()
+        kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
     }
 }
 
@@ -50,8 +51,13 @@ dependencies {
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.navigation.fragment)
 
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.fragment)
 
     // compose
     val composeBom = platform(libs.androidx.compose.bom)

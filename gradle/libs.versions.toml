@@ -1,31 +1,36 @@
 [versions]
 agp = "8.5.1"
 kotlin = "1.9.20"
-coreKtx = "1.13.1"
+core-ktx = "1.13.1"
 junit = "4.13.2"
-junitVersion = "1.2.1"
-espressoCore = "3.6.1"
+junit-version = "1.2.1"
+espresso-core = "3.6.1"
 appcompat = "1.7.0"
 serialization = "1.6.3"
 material = "1.12.0"
-androidxActivity = "1.9.1"
-androidxComposeBom = "2024.04.00"
-androidxComposeCompiler = "1.5.4" # kotlinCompilerExtensionVersion
+androidx-activity = "1.9.1"
+androidx-fragment = "1.8.4"
+androidx-compose-bom = "2024.04.00"
+androidx-compose-compiler = "1.5.4" # used in composeOptions
 
 hilt = "2.52"
 androidxLifecycle = "2.8.4"
-androidxNavigation = "2.8.0"
-androidxHiltNavigationCompose = "1.2.0"
+androidx-navigation = "2.8.0"
+androidx-hilt-navigation-compose = "1.2.0"
+activity = "1.9.2"
+constraintlayout = "2.1.4"
 
 [libraries]
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
-androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
-androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
-androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
-androidx-lifecycle-viewModelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidx-activity" }
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidx-navigation" }
+androidx-navigation-ui = { module = "androidx.navigation:navigation-ui", version.ref = "androidx-navigation" }
+androidx-navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "androidx-navigation" }
+androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidx-hilt-navigation-compose" }
+androidx-fragment = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "androidx-fragment" }
 
-androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "androidxComposeBom" }
+androidx-compose-bom = { module = "androidx.compose:compose-bom", version.ref = "androidx-compose-bom" }
 androidx-compose-foundation = { group = "androidx.compose.foundation", name = "foundation" }
 androidx-compose-foundation-layout = { group = "androidx.compose.foundation", name = "foundation-layout" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
@@ -40,10 +45,12 @@ hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hil
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 junit = { group = "junit", name = "junit", version.ref = "junit" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
-androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit-version" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
 
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
