@@ -16,7 +16,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.cocoslime.presentation.R
-import com.cocoslime.presentation.screen.CommonSection
+import com.cocoslime.presentation.common.CommonSection
 
 class SourceNavActivity : ComponentActivity() {
 

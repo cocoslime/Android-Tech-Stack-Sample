@@ -13,7 +13,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.cocoslime.presentation.R
-import com.cocoslime.presentation.screen.CommonSection
+import com.cocoslime.presentation.common.CommonSection
 import kotlinx.parcelize.Parcelize
 
 class DestinationNavActivity: ComponentActivity() {

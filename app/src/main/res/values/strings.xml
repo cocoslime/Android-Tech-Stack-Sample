@@ -3,4 +3,7 @@
 
     <string name="next_button_text">Next</string>
     <string name="prev_button_text">Prev</string>
+
+    <string name="source_screen_title">Source</string>
+    <string name="destination_screen_title">Destination</string>
 </resources>
