@@ -45,6 +45,10 @@ class FragmentNavActivity : FragmentActivity() {
                 //builder
                 label = getString(R.string.source_screen_title)
             }
+            /**
+             * Args: use Kotiln DSL.
+             * Result: Fragment Result API
+             */
             fragment<DestinationFragment, FragmentNavRoute.DestinationArgs> {
                 label = getString(R.string.destination_screen_title)
             }
