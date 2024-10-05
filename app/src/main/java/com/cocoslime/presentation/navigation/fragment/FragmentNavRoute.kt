@@ -7,6 +7,12 @@ sealed interface FragmentNavRoute {
 
     @Keep
     @Serializable
+    data class VmDestinationArgs(
+        val message: String
+    ): FragmentNavRoute
+
+    @Keep
+    @Serializable
     data class DestinationArgs(
         val message: String
     ): FragmentNavRoute
