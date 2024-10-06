@@ -1,6 +1,7 @@
 package com.cocoslime.presentation.recyclerview
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.activity.ComponentActivity
@@ -22,7 +23,14 @@ class RecyclerViewActivity: ComponentActivity() {
     private val binding get() = _binding!!
 
     private val listItemAdapter: Adapter by lazy {
-        Adapter()
+        Adapter(
+            onClickEntry = { entry ->
+                Log.d(
+                    "RecyclerViewActivity",
+                    "Clicked: ${entry.content}"
+                )
+            }
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +64,7 @@ class RecyclerViewActivity: ComponentActivity() {
     }
 
     private class Adapter(
-        // TODO: onClickListener
+        val onClickEntry: (ListItem.Entry) -> Unit,
     ): ListAdapter<ListItem, BindingViewHolder<out ListItem, *>>(
         ListItemCallback()
     ) {
@@ -73,7 +81,7 @@ class RecyclerViewActivity: ComponentActivity() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder<out ListItem, *> {
             return when(viewType) {
                 ViewType.HEADER.ordinal -> HeaderViewHolder(parent)
-                ViewType.ENTRY.ordinal -> EntryViewHolder(parent)
+                ViewType.ENTRY.ordinal -> EntryViewHolder(parent, onClickEntry)
                 ViewType.FOOTER.ordinal -> FooterViewHolder(parent)
                 else -> throw NotImplementedError()
             }
@@ -98,6 +106,7 @@ class RecyclerViewActivity: ComponentActivity() {
 
         private class EntryViewHolder(
             parent: ViewGroup,
+            private val onClickEntry: (ListItem.Entry) -> Unit,
         ): BindingViewHolder<ListItem.Entry, ItemRecyclerViewEntryBinding>(
             binding = ItemRecyclerViewEntryBinding.inflate(
                 LayoutInflater.from(parent.context),
@@ -111,6 +120,10 @@ class RecyclerViewActivity: ComponentActivity() {
                     .into(binding.image)
 
                 binding.contents.text = item.content
+
+                binding.root.setOnClickListener {
+                    onClickEntry(item)
+                }
             }
         }
 
