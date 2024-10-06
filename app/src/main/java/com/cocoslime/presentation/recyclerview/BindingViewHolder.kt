@@ -7,7 +7,7 @@ abstract class BindingViewHolder<ItemType, VB: ViewBinding> (
     val binding: VB,
 ): RecyclerView.ViewHolder(binding.root) {
     @Suppress("UNCHECKED_CAST")
-    fun onBind(item: Any) {
+    fun onBindItem(item: Any) {
         onBind(item as ItemType)
     }
 
