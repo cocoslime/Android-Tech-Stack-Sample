@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".MainApplication"
         android:allowBackup="true"
@@ -39,9 +41,13 @@
         <activity
             android:name=".navigation.compose.ComposeNavActivity"
             android:exported="false" />
-
         <activity
             android:name=".navigation.fragment.FragmentNavActivity"
+            android:exported="false" />
+
+        <!-- RecyclerView -->
+        <activity
+            android:name=".recyclerview.RecyclerViewActivity"
             android:exported="false" />
     </application>
 

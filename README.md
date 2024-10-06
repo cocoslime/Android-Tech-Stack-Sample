@@ -21,6 +21,11 @@ and [DestinationActivity](https://github.com/cocoslime/Android-Navigation-Sample
 - [Fragments and the Kotlin DSL](https://developer.android.com/guide/navigation/design/kotlin-dsl#navigate)
 - Type-Safe Navigation
 
+## RecyclerView
+- [recyclerview package](https://github.com/cocoslime/Android-Navigation-Sample/blob/master/app/src/main/java/com/cocoslime/presentation/recyclerview)
+- ListAdapter and DiffUtil
+- [BindingViewHolder](https://github.com/cocoslime/Android-Navigation-Sample/blob/master/app/src/main/java/com/cocoslime/presentation/recyclerview/BindingViewHolder.kt) 을 통한 보일러 플레이트 코드 제거. (ViewHolder with ViewBinding 기반) 
+
 ## Dependencies
 - Navigation
 - Jetpack Compose
