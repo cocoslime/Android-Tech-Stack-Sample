@@ -39,6 +39,7 @@ class RecyclerViewActivity: ComponentActivity() {
         binding.recyclerView.apply {
             adapter = listItemAdapter
             layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
 
             Adapter.ViewType.entries.forEach {
                 recycledViewPool.setMaxRecycledViews(it.ordinal, it.poolSize)
@@ -80,7 +81,7 @@ class RecyclerViewActivity: ComponentActivity() {
 
         override fun onBindViewHolder(holder: BindingViewHolder<out ListItem, *>, position: Int) {
             val item = getItem(position)
-            holder.onBind(item)
+            holder.onBindItem(item)
         }
 
         private class HeaderViewHolder(

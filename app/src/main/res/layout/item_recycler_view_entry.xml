@@ -13,7 +13,6 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/contents"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
@@ -22,10 +21,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textSize="14sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/image"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text="컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠 "/>
+        tools:text="12컨텐츠 2컨텐츠 2컨텐츠 2컨텐츠 2컨텐츠 "/>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
