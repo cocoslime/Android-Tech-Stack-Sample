@@ -7,4 +7,7 @@
     <string name="source_screen_title">Source</string>
     <string name="destination_screen_title">Destination</string>
     <string name="other_destination_screen_title">Other Destination</string>
+
+    <string name="recycler_view_title">RecyclerView</string>
+    <string name="recycler_view_item_header">HEADER</string>
 </resources>
