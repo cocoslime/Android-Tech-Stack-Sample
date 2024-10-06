@@ -1,6 +1,5 @@
 package com.cocoslime.presentation.navigation
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -8,13 +7,12 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.cocoslime.presentation.common.StartActivityButton
 import com.cocoslime.presentation.navigation.activity.SourceNavActivity
 import com.cocoslime.presentation.navigation.compose.ComposeNavActivity
 import com.cocoslime.presentation.navigation.fragment.FragmentNavActivity
@@ -39,42 +37,24 @@ class NavigationActivity : ComponentActivity() {
             verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            RouteButton(
+            StartActivityButton(
+                activity = this@NavigationActivity,
                 clazz = SourceNavActivity::class.java,
                 buttonText = "Activity -> Activity"
             )
 
-            RouteButton(
+            StartActivityButton(
+                activity = this@NavigationActivity,
                 clazz = ComposeNavActivity::class.java,
                 buttonText = "Compose NavHost"
             )
 
-            RouteButton(
+            StartActivityButton(
+                activity = this@NavigationActivity,
                 clazz = FragmentNavActivity::class.java,
                 buttonText = "Fragment NavHost"
             )
         }
     }
 
-    @Composable
-    fun <T> RouteButton(
-        clazz: Class<T>,
-        buttonText: String
-    ) {
-        Button(
-            onClick = {
-                startActivity(
-                    Intent(
-                        this@NavigationActivity,
-                        clazz
-                    )
-                )
-            },
-        ) {
-            Text(
-                buttonText,
-                style = MaterialTheme.typography.labelLarge
-            )
-        }
-    }
 }

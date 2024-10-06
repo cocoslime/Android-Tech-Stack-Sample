@@ -4,17 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.activity.ComponentActivity
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.cocoslime.presentation.databinding.ActivityRecyclerViewBinding
 import com.cocoslime.presentation.databinding.ItemRecyclerViewEntryBinding
 import com.cocoslime.presentation.databinding.ItemRecyclerViewHeaderBinding
+import kotlinx.coroutines.launch
 
 class RecyclerViewActivity: ComponentActivity() {
 
     private var _binding: ActivityRecyclerViewBinding? = null
     private val binding get() = _binding!!
+
+    private val listItemAdapter: Adapter by lazy {
+        Adapter()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,10 +35,26 @@ class RecyclerViewActivity: ComponentActivity() {
 
     private fun initRecyclerView() {
 
+        binding.recyclerView.apply {
+            adapter = listItemAdapter
+            layoutManager = LinearLayoutManager(context)
+
+            Adapter.ViewType.entries.forEach {
+                recycledViewPool.setMaxRecycledViews(it.ordinal, it.poolSize)
+            }
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                listItemAdapter.submitList(
+                    dummyListItems
+                )
+            }
+        }
     }
 
     private class Adapter(
-
+        // TODO: onClickListener
     ): ListAdapter<ListItem, BindingViewHolder<out ListItem, *>>(
         ListItemCallback()
     ) {

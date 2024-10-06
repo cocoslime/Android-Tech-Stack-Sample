@@ -14,7 +14,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import com.cocoslime.presentation.common.StartActivityButton
 import com.cocoslime.presentation.navigation.NavigationActivity
+import com.cocoslime.presentation.navigation.activity.SourceNavActivity
+import com.cocoslime.presentation.recyclerview.RecyclerViewActivity
 
 class MainActivity : ComponentActivity() {
 
@@ -33,24 +37,20 @@ class MainActivity : ComponentActivity() {
     private fun MainScreen() {
         Column(
             modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
+            verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Button(
-                onClick = {
-                    startActivity(
-                        Intent(
-                            this@MainActivity,
-                            NavigationActivity::class.java
-                        )
-                    )
-                },
-            ) {
-                Text(
-                    "Navigation",
-                    style = MaterialTheme.typography.labelLarge
-                )
-            }
+            StartActivityButton(
+                activity = this@MainActivity,
+                clazz = NavigationActivity::class.java,
+                buttonText = "Navigation",
+            )
+
+            StartActivityButton(
+                activity = this@MainActivity,
+                clazz = RecyclerViewActivity::class.java,
+                buttonText = "RecyclerView",
+            )
         }
     }
 }
