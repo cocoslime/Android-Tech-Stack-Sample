@@ -17,7 +17,7 @@ val dummyListItems = listOf(
         imageUrl = "https://picsum.photos/id/3/200",
         content = "This is a dummy content 3",
     ),
-//    ListItem.Footer(
-//        message = "This is a dummy footer",
-//    ),
+    ListItem.Footer(
+        message = "This is a dummy footer",
+    ),
 )

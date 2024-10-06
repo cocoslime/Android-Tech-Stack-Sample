@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.Glide
 import com.cocoslime.presentation.databinding.ActivityRecyclerViewBinding
 import com.cocoslime.presentation.databinding.ItemRecyclerViewEntryBinding
+import com.cocoslime.presentation.databinding.ItemRecyclerViewFooterBinding
 import com.cocoslime.presentation.databinding.ItemRecyclerViewHeaderBinding
 import kotlinx.coroutines.launch
 
@@ -72,6 +73,7 @@ class RecyclerViewActivity: ComponentActivity() {
             return when(viewType) {
                 ViewType.HEADER.ordinal -> HeaderViewHolder(parent)
                 ViewType.ENTRY.ordinal -> EntryViewHolder(parent)
+                ViewType.FOOTER.ordinal -> FooterViewHolder(parent)
                 else -> throw NotImplementedError()
             }
         }
@@ -108,6 +110,20 @@ class RecyclerViewActivity: ComponentActivity() {
                     .into(binding.image)
 
                 binding.contents.text = item.content
+            }
+        }
+
+        private class FooterViewHolder(
+            parent: ViewGroup,
+        ): BindingViewHolder<ListItem.Footer, ItemRecyclerViewFooterBinding>(
+            binding = ItemRecyclerViewFooterBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        ) {
+            override fun onBind(item: ListItem.Footer) {
+                binding.message.text = item.message
             }
         }
 
