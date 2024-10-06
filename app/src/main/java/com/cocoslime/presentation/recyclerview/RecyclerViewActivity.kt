@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.activity.ComponentActivity
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.cocoslime.presentation.databinding.ActivityRecyclerViewBinding
 import com.cocoslime.presentation.databinding.ItemRecyclerViewEntryBinding
 import com.cocoslime.presentation.databinding.ItemRecyclerViewHeaderBinding
@@ -46,6 +47,7 @@ class RecyclerViewActivity: ComponentActivity() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder<out ListItem, *> {
             return when(viewType) {
                 ViewType.HEADER.ordinal -> HeaderViewHolder(parent)
+                ViewType.ENTRY.ordinal -> EntryViewHolder(parent)
                 else -> throw NotImplementedError()
             }
         }
@@ -77,6 +79,9 @@ class RecyclerViewActivity: ComponentActivity() {
             )
         ) {
             override fun onBind(item: ListItem.Entry) {
+                Glide.with(binding.root)
+                    .load(item.imageUrl)
+                    .into(binding.image)
 
                 binding.contents.text = item.content
             }
