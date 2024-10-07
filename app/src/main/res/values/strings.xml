@@ -10,4 +10,7 @@
 
     <string name="recycler_view_title">RecyclerView</string>
     <string name="recycler_view_item_header">HEADER</string>
+
+    <string name="tab_first">Input</string>
+    <string name="tab_second">Output</string>
 </resources>

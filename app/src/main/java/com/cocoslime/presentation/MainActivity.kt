@@ -19,6 +19,7 @@ import com.cocoslime.presentation.common.StartActivityButton
 import com.cocoslime.presentation.navigation.NavigationActivity
 import com.cocoslime.presentation.navigation.activity.SourceNavActivity
 import com.cocoslime.presentation.recyclerview.RecyclerViewActivity
+import com.cocoslime.presentation.viewpager.ViewPagerActivity
 
 class MainActivity : ComponentActivity() {
 
@@ -50,6 +51,12 @@ class MainActivity : ComponentActivity() {
                 activity = this@MainActivity,
                 clazz = RecyclerViewActivity::class.java,
                 buttonText = "RecyclerView",
+            )
+
+            StartActivityButton(
+                activity = this@MainActivity,
+                clazz = ViewPagerActivity::class.java,
+                buttonText = "ViewPager",
             )
         }
     }

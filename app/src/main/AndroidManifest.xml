@@ -49,6 +49,10 @@
         <activity
             android:name=".recyclerview.RecyclerViewActivity"
             android:exported="false" />
+
+        <!-- ViewPager -->
+        <activity android:name=".viewpager.ViewPagerActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
