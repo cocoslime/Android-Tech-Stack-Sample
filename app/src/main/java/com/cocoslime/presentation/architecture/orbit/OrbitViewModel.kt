@@ -31,12 +31,17 @@ class OrbitViewModel @Inject constructor(
 
     fun load() = intent {
         postSideEffect(SideEffect.Toast("Loading..."))
-
-        val title = dummyUseCase.getOrbitTitle()
         reduce {
-            state.copy(
-                title = title
-            )
+            state.copy(imageUrl = null)
+        }
+
+        if (state.title == null) {
+            val title = dummyUseCase.getOrbitTitle()
+            reduce {
+                state.copy(
+                    title = title
+                )
+            }
         }
 
         val imageUrl = dummyUseCase.getOrbitImageUrl()
