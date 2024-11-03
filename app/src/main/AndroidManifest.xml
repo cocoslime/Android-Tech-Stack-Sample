@@ -53,6 +53,10 @@
         <!-- ViewPager -->
         <activity android:name=".viewpager.ViewPagerActivity"
             android:exported="false" />
+
+        <!-- Orbit -->
+        <activity android:name=".architecture.orbit.OrbitActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
