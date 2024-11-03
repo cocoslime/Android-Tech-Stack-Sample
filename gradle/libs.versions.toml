@@ -15,6 +15,8 @@ androidx-compose-compiler = "1.5.4" # used in composeOptions
 
 hilt = "2.52"
 hilt-ext = "1.1.0"
+orbit = "6.1.0"
+coil = "2.3.0"
 androidxLifecycle = "2.8.4"
 androidx-navigation = "2.8.0"
 androidx-hilt-navigation-compose = "1.2.0"
@@ -45,7 +47,11 @@ androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-ext" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
-
+orbit-core = { group = "org.orbit-mvi", name = "orbit-core", version.ref = "orbit"}
+orbit-viewmodel = { group = "org.orbit-mvi", name = "orbit-viewmodel", version.ref = "orbit"}
+orbit-compose = { group = "org.orbit-mvi", name = "orbit-compose", version.ref = "orbit"}
+coil = { group = "io.coil-kt", name = "coil", version.ref = "coil"}
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil"}
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 junit = { group = "junit", name = "junit", version.ref = "junit" }

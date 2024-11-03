@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.cocoslime.presentation.architecture.orbit.OrbitActivity
 import com.cocoslime.presentation.common.StartActivityButton
 import com.cocoslime.presentation.navigation.NavigationActivity
 import com.cocoslime.presentation.navigation.activity.SourceNavActivity
@@ -57,6 +58,12 @@ class MainActivity : ComponentActivity() {
                 activity = this@MainActivity,
                 clazz = ViewPagerActivity::class.java,
                 buttonText = "ViewPager",
+            )
+
+            StartActivityButton(
+                activity = this@MainActivity,
+                clazz = OrbitActivity::class.java,
+                buttonText = "Mvi-Orbit",
             )
         }
     }

@@ -77,5 +77,14 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
     kapt(libs.hilt.compiler)
 
+    // orbit
+    implementation(libs.orbit.core)
+    implementation(libs.orbit.compose)
+    implementation(libs.orbit.viewmodel)
+
+    // coil
+    implementation(libs.coil)
+    implementation(libs.coil.compose)
+
     implementation(libs.glide)
 }
