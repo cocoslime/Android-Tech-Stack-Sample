@@ -26,6 +26,10 @@ and [DestinationActivity](https://github.com/cocoslime/Android-Navigation-Sample
 - ListAdapter and DiffUtil
 - [BindingViewHolder](https://github.com/cocoslime/Android-Navigation-Sample/blob/master/app/src/main/java/com/cocoslime/presentation/recyclerview/BindingViewHolder.kt) 을 통한 보일러 플레이트 코드 제거. (ViewHolder with ViewBinding 기반) 
 
+## Architecture
+### MVI with [Orbit](https://orbit-mvi.org/)
+
+
 ## Dependencies
 - Navigation
 - Jetpack Compose
