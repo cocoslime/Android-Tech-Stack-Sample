@@ -30,10 +30,6 @@ class OrbitViewModel @Inject constructor(
         }
     )
 
-    init {
-        load()
-    }
-
     fun load() = intent {
         postSideEffect(SideEffect.Toast("Loading..."))
         reduce {

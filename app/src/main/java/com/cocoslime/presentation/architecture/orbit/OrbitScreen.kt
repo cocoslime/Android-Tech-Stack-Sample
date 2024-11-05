@@ -27,18 +27,24 @@ fun OrbitScreen(
     viewModel: OrbitViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.collectAsState()
-    val context = LocalContext.current
-
-    viewModel.collectSideEffect { sideEffect->
-        when(sideEffect){
-            is OrbitViewModel.SideEffect.Toast -> {
-                Toast.makeText(context, sideEffect.message, Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
 
     Scaffold(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
+        bottomBar = {
+            Button(
+                onClick = {
+                    viewModel.load()
+                },
+                modifier = Modifier
+                    .padding(vertical = 16.dp, horizontal = 24.dp)
+                    .fillMaxWidth()
+            ) {
+                Text(
+                    text = "Reload Image",
+                    modifier = Modifier.padding(vertical = 8.dp)
+                )
+            }
+        }
     ) { contentPadding ->
         Column(
             modifier = Modifier
@@ -65,11 +71,6 @@ fun OrbitScreen(
                     contentDescription = null
                 )
 
-                Button(onClick = {
-                    viewModel.load()
-                }) {
-                    Text("Reload Image")
-                }
             }
         }
     }
