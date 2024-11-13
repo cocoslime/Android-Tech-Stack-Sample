@@ -37,7 +37,8 @@ class NetworkModule {
 
         val converterFactory = Json {
             ignoreUnknownKeys = true
-        }.asConverterFactory("application/json; charset=UTF8".toMediaType())
+        }
+            .asConverterFactory("application/json; charset=UTF8".toMediaType())
 
         val retrofit =
             Retrofit.Builder()

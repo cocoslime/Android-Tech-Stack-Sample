@@ -57,6 +57,10 @@
         <!-- Orbit -->
         <activity android:name=".architecture.orbit.OrbitActivity"
             android:exported="false" />
+
+        <!-- Paging3 -->
+        <activity android:name=".paging.PagingActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
