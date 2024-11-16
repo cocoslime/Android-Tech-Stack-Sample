@@ -12,7 +12,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,13 +21,23 @@ class PagingViewModel @Inject constructor (
     private val _user = MutableStateFlow("cocoslime")
     val user: StateFlow<String> = _user
 
-    val repoPagingFlow = Pager(
-        // Configure how data is loaded by passing additional properties to
-        // PagingConfig, such as prefetchDistance.
-        PagingConfig(pageSize = 10)
-    ) {
-        GithubRepoPagingSource(githubService, user.value)
+    val repoPagingFlow = user.flatMapLatest {
+        Pager(
+            // Configure how data is loaded by passing additional properties to
+            // PagingConfig, such as prefetchDistance.
+            PagingConfig(pageSize = PAGE_SIZE)
+        ) {
+            GithubRepoPagingSource(
+                githubService,
+                it,
+                perPage = PAGE_SIZE
+            )
+        }
+            .flow
     }
-        .flow
         .cachedIn(viewModelScope)
+
+    companion object {
+        private const val PAGE_SIZE = 10
+    }
 }

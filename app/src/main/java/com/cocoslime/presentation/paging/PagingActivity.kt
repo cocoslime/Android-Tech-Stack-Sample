@@ -10,16 +10,13 @@ import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
-import androidx.paging.map
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
+import com.bumptech.glide.Glide
 import com.cocoslime.data.model.GithubRepoResponse
 import com.cocoslime.presentation.databinding.ActivityRecyclerViewBinding
 import com.cocoslime.presentation.databinding.ItemRecyclerViewEntryBinding
 import com.cocoslime.presentation.recyclerview.BindingViewHolder
-import com.cocoslime.presentation.recyclerview.ListItem
-import com.cocoslime.presentation.recyclerview.ListItemCallback
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -62,6 +59,7 @@ class PagingActivity : ComponentActivity() {
                 val refresh = loadStates.refresh
                 when (refresh) {
                     is LoadState.Loading -> {
+                        Log.d("PagingActivity", refresh.toString())
                         // Show loading spinner
                     }
                     is LoadState.Error -> {
@@ -73,7 +71,7 @@ class PagingActivity : ComponentActivity() {
                         ).show()
                     }
                     is LoadState.NotLoading -> {
-                        println("refresh.endOfPaginationReached ${refresh.endOfPaginationReached}")
+                        Log.d("PagingActivity", refresh.toString())
                         // Hide loading spinner
                     }
                 }
@@ -110,7 +108,13 @@ class PagingActivity : ComponentActivity() {
             )
         ) {
             override fun onBind(item: GithubRepoResponse) {
-                binding.contents.text = item.name + "\n" + item.description.orEmpty()
+                // TODO: Language 에 따라 다른 이미지
+                Glide.with(binding.image)
+                    .load(item.owner.avatarUrl)
+                    .into(binding.image)
+
+                binding.contents.text = item.name
+                binding.language.text = item.language
             }
         }
 
