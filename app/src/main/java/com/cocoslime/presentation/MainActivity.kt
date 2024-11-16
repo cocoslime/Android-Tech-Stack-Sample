@@ -19,6 +19,7 @@ import com.cocoslime.presentation.architecture.orbit.OrbitActivity
 import com.cocoslime.presentation.common.StartActivityButton
 import com.cocoslime.presentation.navigation.NavigationActivity
 import com.cocoslime.presentation.navigation.activity.SourceNavActivity
+import com.cocoslime.presentation.paging.PagingActivity
 import com.cocoslime.presentation.recyclerview.RecyclerViewActivity
 import com.cocoslime.presentation.viewpager.ViewPagerActivity
 
@@ -64,6 +65,12 @@ class MainActivity : ComponentActivity() {
                 activity = this@MainActivity,
                 clazz = OrbitActivity::class.java,
                 buttonText = "Mvi-Orbit",
+            )
+
+            StartActivityButton(
+                activity = this@MainActivity,
+                clazz = PagingActivity::class.java,
+                buttonText = "Paging 3",
             )
         }
     }
