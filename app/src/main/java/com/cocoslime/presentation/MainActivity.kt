@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.cocoslime.presentation.architecture.orbit.OrbitActivity
 import com.cocoslime.presentation.common.StartActivityButton
+import com.cocoslime.presentation.lazylayout.column.LazyColumnActivity
 import com.cocoslime.presentation.navigation.NavigationActivity
 import com.cocoslime.presentation.navigation.activity.SourceNavActivity
 import com.cocoslime.presentation.paging.PagingActivity
@@ -71,6 +72,13 @@ class MainActivity : ComponentActivity() {
                 activity = this@MainActivity,
                 clazz = PagingActivity::class.java,
                 buttonText = "Paging 3",
+            )
+
+            // LazyColumnActivity
+            StartActivityButton(
+                activity = this@MainActivity,
+                clazz = LazyColumnActivity::class.java,
+                buttonText = "LazyColumn",
             )
         }
     }
