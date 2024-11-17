@@ -11,6 +11,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.Glide
+import com.cocoslime.presentation.common.list.CommonListItemContainer
+import com.cocoslime.presentation.common.list.ListItemCallback
+import com.cocoslime.presentation.common.list.dummyListItems
 import com.cocoslime.presentation.databinding.ActivityRecyclerViewBinding
 import com.cocoslime.presentation.databinding.ItemRecyclerViewEntryBinding
 import com.cocoslime.presentation.databinding.ItemRecyclerViewFooterBinding
@@ -64,21 +67,21 @@ class RecyclerViewActivity: ComponentActivity() {
     }
 
     private class Adapter(
-        val onClickEntry: (ListItem.Entry) -> Unit,
-    ): ListAdapter<ListItem, BindingViewHolder<out ListItem, *>>(
+        val onClickEntry: (CommonListItemContainer.Entry) -> Unit,
+    ): ListAdapter<CommonListItemContainer, BindingViewHolder<out CommonListItemContainer, *>>(
         ListItemCallback()
     ) {
 
         override fun getItemViewType(position: Int): Int {
             return when (getItem(position)) {
-                is ListItem.Header -> ViewType.HEADER.ordinal
-                is ListItem.Entry -> ViewType.ENTRY.ordinal
-                is ListItem.Footer -> ViewType.FOOTER.ordinal
+                is CommonListItemContainer.Header -> ViewType.HEADER.ordinal
+                is CommonListItemContainer.Entry -> ViewType.ENTRY.ordinal
+                is CommonListItemContainer.Footer -> ViewType.FOOTER.ordinal
                 else -> throw NotImplementedError()
             }
         }
 
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder<out ListItem, *> {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingViewHolder<out CommonListItemContainer, *> {
             return when(viewType) {
                 ViewType.HEADER.ordinal -> HeaderViewHolder(parent)
                 ViewType.ENTRY.ordinal -> EntryViewHolder(parent, onClickEntry)
@@ -87,34 +90,34 @@ class RecyclerViewActivity: ComponentActivity() {
             }
         }
 
-        override fun onBindViewHolder(holder: BindingViewHolder<out ListItem, *>, position: Int) {
+        override fun onBindViewHolder(holder: BindingViewHolder<out CommonListItemContainer, *>, position: Int) {
             val item = getItem(position)
             holder.onBindItem(item)
         }
 
         private class HeaderViewHolder(
             parent: ViewGroup,
-        ): BindingViewHolder<ListItem.Header, ItemRecyclerViewHeaderBinding>(
+        ): BindingViewHolder<CommonListItemContainer.Header, ItemRecyclerViewHeaderBinding>(
             binding = ItemRecyclerViewHeaderBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
         ) {
-            override fun onBind(item: ListItem.Header) = Unit
+            override fun onBind(item: CommonListItemContainer.Header) = Unit
         }
 
         private class EntryViewHolder(
             parent: ViewGroup,
-            private val onClickEntry: (ListItem.Entry) -> Unit,
-        ): BindingViewHolder<ListItem.Entry, ItemRecyclerViewEntryBinding>(
+            private val onClickEntry: (CommonListItemContainer.Entry) -> Unit,
+        ): BindingViewHolder<CommonListItemContainer.Entry, ItemRecyclerViewEntryBinding>(
             binding = ItemRecyclerViewEntryBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
         ) {
-            override fun onBind(item: ListItem.Entry) {
+            override fun onBind(item: CommonListItemContainer.Entry) {
                 Glide.with(binding.root)
                     .load(item.imageUrl)
                     .into(binding.image)
@@ -129,14 +132,14 @@ class RecyclerViewActivity: ComponentActivity() {
 
         private class FooterViewHolder(
             parent: ViewGroup,
-        ): BindingViewHolder<ListItem.Footer, ItemRecyclerViewFooterBinding>(
+        ): BindingViewHolder<CommonListItemContainer.Footer, ItemRecyclerViewFooterBinding>(
             binding = ItemRecyclerViewFooterBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
         ) {
-            override fun onBind(item: ListItem.Footer) {
+            override fun onBind(item: CommonListItemContainer.Footer) {
                 binding.message.text = item.message
             }
         }
