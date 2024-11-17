@@ -1,11 +1,11 @@
-package com.cocoslime.presentation.recyclerview
+package com.cocoslime.presentation.common.list
 
 import androidx.recyclerview.widget.DiffUtil
 
-sealed interface ListItem {
+sealed interface CommonListItemContainer {
     val identifier: String
 
-    data object Header : ListItem {
+    data object Header : CommonListItemContainer {
         override val identifier: String = this::class.java.simpleName
     }
 
@@ -13,28 +13,28 @@ sealed interface ListItem {
         val id: Long,
         val imageUrl: String,
         val content: String,
-    ): ListItem {
+    ): CommonListItemContainer {
         override val identifier: String = this::class.java.simpleName + id
     }
 
     data class Footer(
         val message: String,
-    ): ListItem {
+    ): CommonListItemContainer {
         override val identifier: String = this::class.java.simpleName
     }
 }
 
-class ListItemCallback : DiffUtil.ItemCallback<ListItem>() {
+class ListItemCallback : DiffUtil.ItemCallback<CommonListItemContainer>() {
     override fun areItemsTheSame(
-        oldItem: ListItem,
-        newItem: ListItem
+        oldItem: CommonListItemContainer,
+        newItem: CommonListItemContainer
     ): Boolean {
         return oldItem.identifier == newItem.identifier
     }
 
     override fun areContentsTheSame(
-        oldItem: ListItem,
-        newItem: ListItem
+        oldItem: CommonListItemContainer,
+        newItem: CommonListItemContainer
     ): Boolean {
         return oldItem == newItem
     }
