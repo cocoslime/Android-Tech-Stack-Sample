@@ -1,5 +1,8 @@
 package com.cocoslime.presentation.paging
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -89,7 +92,7 @@ class PagingActivity : ComponentActivity() {
             parent: ViewGroup,
             viewType: Int
         ): RepoViewHolder {
-            return RepoViewHolder(parent)
+            return RepoViewHolder(parent.context, parent)
         }
 
         override fun onBindViewHolder(holder: BindingViewHolder<out GithubRepoResponse, *>, position: Int) {
@@ -100,6 +103,7 @@ class PagingActivity : ComponentActivity() {
         }
 
         class RepoViewHolder(
+            private val context: Context,
             parent: ViewGroup,
         ): BindingViewHolder<GithubRepoResponse, ItemRecyclerViewEntryBinding>(
             ItemRecyclerViewEntryBinding.inflate(
@@ -108,15 +112,26 @@ class PagingActivity : ComponentActivity() {
                 false
             )
         ) {
+
             override fun onBind(item: GithubRepoResponse) {
                 Glide.with(binding.image)
-                    .load(getLanguageImage(item.language)?.let {
+                    .load(getLanguageImage(item.language) ?: run {
                         "Unknown language: ${item.language}".printlnDebug()
+                        null
                     })
                     .into(binding.image)
 
                 binding.contents.text = item.name
                 binding.subContents.text = item.url
+
+                binding.root.setOnClickListener {
+                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(item.url))
+                    if (context.packageManager.resolveActivity(intent, 0) != null) {
+                        context.startActivity(intent)
+                    } else {
+                        "Cannot resolve activity ${item.url}".printlnDebug()
+                    }
+                }
             }
 
             private fun getLanguageImage(language: String?): String? {
