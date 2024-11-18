@@ -108,13 +108,24 @@ class PagingActivity : ComponentActivity() {
             )
         ) {
             override fun onBind(item: GithubRepoResponse) {
-                // TODO: Language 에 따라 다른 이미지
                 Glide.with(binding.image)
-                    .load(item.owner.avatarUrl)
+                    .load(getLanguageImage(item.language))
                     .into(binding.image)
 
                 binding.contents.text = item.name
                 binding.subContents.text = item.url
+            }
+
+            private fun getLanguageImage(language: String?): String? {
+                return when (language?.lowercase()) {
+                    "kotlin" -> {
+                        "https://upload.wikimedia.org/wikipedia/commons/7/74/Kotlin_Icon.png"
+                    }
+                    "javascript" -> {
+                        "https://cdn.pixabay.com/photo/2015/04/23/17/41/javascript-736400_1280.png"
+                    }
+                    else -> null
+                }
             }
         }
 
