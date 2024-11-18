@@ -114,7 +114,7 @@ class PagingActivity : ComponentActivity() {
                     .into(binding.image)
 
                 binding.contents.text = item.name
-                binding.language.text = item.language
+                binding.subContents.text = item.url
             }
         }
 
