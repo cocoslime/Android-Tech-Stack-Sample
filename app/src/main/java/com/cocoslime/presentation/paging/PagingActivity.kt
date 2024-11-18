@@ -17,6 +17,7 @@ import com.cocoslime.data.model.GithubRepoResponse
 import com.cocoslime.presentation.databinding.ActivityRecyclerViewBinding
 import com.cocoslime.presentation.databinding.ItemRecyclerViewEntryBinding
 import com.cocoslime.presentation.recyclerview.BindingViewHolder
+import com.cocoslime.printlnDebug
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -109,7 +110,9 @@ class PagingActivity : ComponentActivity() {
         ) {
             override fun onBind(item: GithubRepoResponse) {
                 Glide.with(binding.image)
-                    .load(getLanguageImage(item.language))
+                    .load(getLanguageImage(item.language)?.let {
+                        "Unknown language: ${item.language}".printlnDebug()
+                    })
                     .into(binding.image)
 
                 binding.contents.text = item.name

@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.cocoslime.presentation.common.list.CommonListItemContainer
 import com.cocoslime.presentation.common.list.dummyListItems
-import com.cocoslime.println
 
 @Composable
 fun LazyColumnScreen() {

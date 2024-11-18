@@ -4,7 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.cocoslime.data.model.GithubRepoResponse
 import com.cocoslime.data.service.GithubService
-import com.cocoslime.println
+import com.cocoslime.printlnDebug
 
 class GithubRepoPagingSource (
     private val service: GithubService,
@@ -58,8 +58,8 @@ class GithubRepoPagingSource (
     }
 
     private fun <T: Any> LoadParams<T>.printLog() {
-        "$this".println()
-        "loadSize: ${loadSize}".println()
-        "key: ${key}".println()
+        "$this".printlnDebug()
+        "loadSize: ${loadSize}".printlnDebug()
+        "key: ${key}".printlnDebug()
     }
 }
