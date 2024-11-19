@@ -96,4 +96,9 @@ dependencies {
     implementation(libs.retrofit.converter.serialization)
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging)
+
+    // test
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.kotlin.test)
+    testImplementation(libs.kotlin.test.junit)
 }
