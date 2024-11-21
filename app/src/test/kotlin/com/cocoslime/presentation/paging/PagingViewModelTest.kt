@@ -3,6 +3,7 @@ package com.cocoslime.presentation.paging
 
 import androidx.paging.PagingData
 import com.cocoslime.data.model.GithubRepoResponse
+import com.cocoslime.presentation.TestDispatcherRule
 import com.cocoslime.presentation.data.service.TestGithubService
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
@@ -14,9 +15,8 @@ import org.junit.Test
 
 class PagingViewModelTest {
 
-    @OptIn(ExperimentalCoroutinesApi::class)
     @get:Rule
-    val dispatcherRule = UnconfinedTestDispatcher()
+    val dispatcherRule = TestDispatcherRule()
 
     private lateinit var viewModel: PagingViewModel
 
