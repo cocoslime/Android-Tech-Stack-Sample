@@ -16,7 +16,15 @@ class TestGithubService : GithubService {
         val startIndex = (page - 1) * perPage
         val endIndex = minOf(startIndex + perPage, MAX_SIZE)
         return (startIndex until endIndex).map { index ->
-            GithubRepoResponse(
+            createFakeGithubRepoResponse(index)
+        }
+    }
+
+    companion object {
+        fun createFakeGithubRepoResponse(
+            index: Int
+        ): GithubRepoResponse {
+            return GithubRepoResponse(
                 id = index.toLong(),
                 name = "Repo $index",
                 url = "",
