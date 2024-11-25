@@ -9,6 +9,9 @@ import kotlinx.coroutines.test.runTest
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
+/*
+https://developer.android.com/topic/libraries/architecture/paging/test?hl=ko#pagingsource-tests
+ */
 class GithubRepoPagingSourceTest {
 
     @Test

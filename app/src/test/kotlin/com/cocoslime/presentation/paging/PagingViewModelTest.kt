@@ -14,6 +14,9 @@ import org.junit.Rule
 import org.junit.Test
 import kotlin.test.assertEquals
 
+/*
+https://developer.android.com/topic/libraries/architecture/paging/test?hl=ko#ui-layer-tests
+ */
 class PagingViewModelTest {
 
     @get:Rule
