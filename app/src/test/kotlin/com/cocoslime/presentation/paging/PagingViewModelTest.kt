@@ -3,6 +3,7 @@ package com.cocoslime.presentation.paging
 
 import androidx.paging.PagingData
 import androidx.paging.testing.asSnapshot
+import com.cocoslime.common.createFakeGithubRepoResponse
 import com.cocoslime.data.model.GithubRepoResponse
 import com.cocoslime.presentation.TestDispatcherRule
 import com.cocoslime.presentation.data.service.TestGithubService
@@ -23,7 +24,13 @@ class PagingViewModelTest {
     @Before
     fun setup() {
         viewModel = PagingViewModel(
-            githubService = TestGithubService()
+            githubService = TestGithubService().apply {
+                repoResponseList.addAll(
+                    (0 until 100).map { index ->
+                        createFakeGithubRepoResponse(index.toLong())
+                    }
+                )
+            }
         )
     }
 
@@ -42,7 +49,7 @@ class PagingViewModelTest {
         // With the asSnapshot complete, you can now verify that the snapshot
         // has the expected values
         assertEquals(
-            expected = (0 until 50).map(TestGithubService::createFakeGithubRepoResponse),
+            expected = (0L until 50L).map(::createFakeGithubRepoResponse),
             actual = itemsSnapshot.subList(0, 50)
         )
     }

@@ -4,9 +4,9 @@ import com.cocoslime.data.model.GithubRepoResponse
 import com.cocoslime.data.model.Owner
 import com.cocoslime.data.service.GithubService
 
-private const val MAX_SIZE = 100
-
 class TestGithubService : GithubService {
+
+    val repoResponseList = mutableListOf<GithubRepoResponse>()
 
     override suspend fun getRepos(
         username: String,
@@ -14,26 +14,7 @@ class TestGithubService : GithubService {
         page: Int
     ): List<GithubRepoResponse> {
         val startIndex = (page - 1) * perPage
-        val endIndex = minOf(startIndex + perPage, MAX_SIZE)
-        return (startIndex until endIndex).map { index ->
-            createFakeGithubRepoResponse(index)
-        }
-    }
-
-    companion object {
-        fun createFakeGithubRepoResponse(
-            index: Int
-        ): GithubRepoResponse {
-            return GithubRepoResponse(
-                id = index.toLong(),
-                name = "Repo $index",
-                url = "",
-                description = null,
-                language = null,
-                owner = Owner(
-                    avatarUrl = ""
-                )
-            )
-        }
+        val endIndex = minOf(startIndex + perPage, repoResponseList.size)
+        return repoResponseList.subList(startIndex, endIndex)
     }
 }
