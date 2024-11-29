@@ -16,7 +16,6 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.cocoslime.data.model.GithubRepoResponse
 import com.cocoslime.presentation.databinding.ActivityRecyclerViewBinding
 import com.cocoslime.presentation.databinding.ItemRecyclerViewEntryBinding
 import com.cocoslime.presentation.recyclerview.BindingViewHolder
@@ -84,28 +83,53 @@ class PagingActivity : ComponentActivity() {
     }
 
     private class Adapter :
-        PagingDataAdapter<GithubRepoResponse, BindingViewHolder<out GithubRepoResponse, *>>(
-            GithubRepoResponseDiffUtil()
+        PagingDataAdapter<PagingViewModel.UiModel, BindingViewHolder<out PagingViewModel.UiModel, *>>(
+            UiModelDiffUtil()
         ) {
+
+        override fun getItemViewType(position: Int): Int {
+            return when (val item = getItem(position)) {
+                is PagingViewModel.UiModel.UserModel -> 0
+                is PagingViewModel.UiModel.SeparatorModel -> 1
+                else -> throw IllegalArgumentException("Unknown view type: $item")
+            }
+        }
 
         override fun onCreateViewHolder(
             parent: ViewGroup,
             viewType: Int
-        ): RepoViewHolder {
-            return RepoViewHolder(parent.context, parent)
+        ): BindingViewHolder<out PagingViewModel.UiModel, *> {
+            return when(viewType) {
+                0 -> RepoViewHolder(parent.context, parent)
+                1 -> SeparatorViewHolder(parent)
+                else -> throw IllegalArgumentException("Unknown view type: $viewType")
+            }
         }
 
-        override fun onBindViewHolder(holder: BindingViewHolder<out GithubRepoResponse, *>, position: Int) {
-            val item = getItem(position)
-            if (item != null) {
+        override fun onBindViewHolder(holder: BindingViewHolder<out PagingViewModel.UiModel, *>, position: Int) {
+            getItem(position)?.let { item ->
                 holder.onBindItem(item)
+            }
+        }
+
+        class SeparatorViewHolder(
+            parent: ViewGroup,
+        ): BindingViewHolder<PagingViewModel.UiModel.SeparatorModel, ItemRecyclerViewEntryBinding>(
+            ItemRecyclerViewEntryBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        ) {
+            override fun onBind(item: PagingViewModel.UiModel.SeparatorModel) {
+                binding.contents.text = item.description
             }
         }
 
         class RepoViewHolder(
             private val context: Context,
             parent: ViewGroup,
-        ): BindingViewHolder<GithubRepoResponse, ItemRecyclerViewEntryBinding>(
+        ): BindingViewHolder<PagingViewModel.UiModel.UserModel, ItemRecyclerViewEntryBinding>(
             ItemRecyclerViewEntryBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -113,7 +137,7 @@ class PagingActivity : ComponentActivity() {
             )
         ) {
 
-            override fun onBind(item: GithubRepoResponse) {
+            override fun onBind(item: PagingViewModel.UiModel.UserModel) {
                 Glide.with(binding.image)
                     .load(getLanguageImage(item.language) ?: run {
                         "Unknown language: ${item.language}".printlnDebug()
@@ -149,17 +173,24 @@ class PagingActivity : ComponentActivity() {
 
     }
 
-    private class GithubRepoResponseDiffUtil: DiffUtil.ItemCallback<GithubRepoResponse>() {
+    private class UiModelDiffUtil: DiffUtil.ItemCallback<PagingViewModel.UiModel>() {
+
         override fun areItemsTheSame(
-            oldItem: GithubRepoResponse,
-            newItem: GithubRepoResponse
+            oldItem: PagingViewModel.UiModel,
+            newItem: PagingViewModel.UiModel
         ): Boolean {
-            return oldItem.id == newItem.id
+            return if (oldItem is PagingViewModel.UiModel.UserModel && newItem is PagingViewModel.UiModel.UserModel) {
+                oldItem.id == newItem.id
+            } else if (oldItem is PagingViewModel.UiModel.SeparatorModel && newItem is PagingViewModel.UiModel.SeparatorModel) {
+                oldItem.description == newItem.description
+            } else {
+                false
+            }
         }
 
         override fun areContentsTheSame(
-            oldItem: GithubRepoResponse,
-            newItem: GithubRepoResponse
+            oldItem: PagingViewModel.UiModel,
+            newItem: PagingViewModel.UiModel
         ): Boolean {
             return oldItem == newItem
         }
