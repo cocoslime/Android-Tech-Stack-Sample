@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "PresentationSampleArchive"
+rootProject.name = "AndroidTechStackSample"
 include(":app")
  
