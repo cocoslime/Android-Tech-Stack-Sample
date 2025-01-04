@@ -1,6 +1,8 @@
 package com.cocoslime.presentation.lazylayout.column
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,17 +15,26 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.util.trace
 import coil.compose.rememberAsyncImagePainter
 import com.cocoslime.presentation.common.list.CommonListItemContainer
-import com.cocoslime.presentation.common.list.dummyListItems
+import com.cocoslime.presentation.common.list.createDummyListItems
+import com.cocoslime.presentation.common.recomposeHighlighter
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 
 @Composable
 fun LazyColumnScreen() {
-    val data = dummyListItems
+    val data = remember {
+        createDummyListItems(400).toImmutableList()
+    }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -39,11 +50,13 @@ fun LazyColumnScreen() {
 
 @Composable
 private fun ListItemSection(
-    data: List<CommonListItemContainer>,
+    data: ImmutableList<CommonListItemContainer>,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
         modifier = modifier
+            .testTag("list_of_items")
+            .recomposeHighlighter(),
     ) {
         items(
             count = data.size,
@@ -84,7 +97,9 @@ private fun HeaderItem() {
 }
 
 @Composable
-private fun EntryItem(item: CommonListItemContainer.Entry) {
+private fun EntryItem(
+    item: CommonListItemContainer.Entry
+) = trace("EntryItem") {
     Column {
         ListItem(
             headlineContent = { Text(text = item.content) },

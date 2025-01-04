@@ -1,8 +1,10 @@
 package com.cocoslime.presentation.common.list
 
-val dummyListItems = buildList<CommonListItemContainer> {
+val dummyListItems = createDummyListItems(20)
+
+fun createDummyListItems(itemCount: Int) = buildList<CommonListItemContainer> {
     add(CommonListItemContainer.Header)
-    repeat(20) { index ->
+    repeat(itemCount) { index ->
         add(
             CommonListItemContainer.Entry(
                 id = index.toLong(),
