@@ -1,6 +1,7 @@
 package com.cocoslime.presentation.lazylayout.column
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,6 +14,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
@@ -23,7 +26,7 @@ import com.cocoslime.presentation.common.list.dummyListItems
 
 @Composable
 fun LazyColumnScreen() {
-    val data = dummyListItems
+    val data = remember { mutableStateListOf<CommonListItemContainer>().apply { addAll(dummyListItems) } }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -32,7 +35,14 @@ fun LazyColumnScreen() {
             data = data,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(contentPadding)
+                .padding(contentPadding),
+            onClickItem = { clickedItem ->
+                val index = data.indexOfFirst { it is CommonListItemContainer.Entry && it.id == clickedItem.id }
+                if (index != -1) {
+                    val entry = data[index] as CommonListItemContainer.Entry
+                    data[index] = entry.copy(content = entry.content + ".Clicked")
+                }
+            }
         )
     }
 }
@@ -40,7 +50,8 @@ fun LazyColumnScreen() {
 @Composable
 private fun ListItemSection(
     data: List<CommonListItemContainer>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClickItem: (CommonListItemContainer.Entry) -> Unit = {}
 ) {
     LazyColumn(
         modifier = modifier
@@ -59,7 +70,13 @@ private fun ListItemSection(
                     HeaderItem()
                 }
                 is CommonListItemContainer.Entry -> {
-                    EntryItem(item)
+                    EntryItem(
+                        item,
+                        modifier = Modifier,
+                        onClickItem = {
+                            onClickItem(item)
+                        }
+                    )
                 }
                 is CommonListItemContainer.Footer -> {
                     FooterItem(item)
@@ -84,12 +101,19 @@ private fun HeaderItem() {
 }
 
 @Composable
-private fun EntryItem(item: CommonListItemContainer.Entry) {
-    Column {
+private fun EntryItem(
+    item: CommonListItemContainer.Entry,
+    modifier: Modifier = Modifier,
+    onClickItem: () -> Unit = {}
+) {
+    Column (
+        modifier = modifier
+    ) {
         ListItem(
             headlineContent = { Text(text = item.content) },
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .clickable { onClickItem() },
             overlineContent = { Text(text = "ID ${item.id}") },
             leadingContent = {
                 Image(
