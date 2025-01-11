@@ -26,7 +26,7 @@ import com.cocoslime.presentation.common.CommonSection
 fun ComposeMainNavHost() {
     val controller = rememberNavController()
 
-    PrintBackStack(controller)
+//    PrintBackStack(controller)
 
     NavHost(
         navController = controller,
