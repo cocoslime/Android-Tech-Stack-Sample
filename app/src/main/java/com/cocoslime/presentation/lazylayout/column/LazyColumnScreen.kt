@@ -3,6 +3,7 @@ package com.cocoslime.presentation.lazylayout.column
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,6 +17,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -32,9 +34,7 @@ import kotlinx.collections.immutable.toImmutableList
 
 @Composable
 fun LazyColumnScreen() {
-    val data = remember {
-        createDummyListItems(400).toImmutableList()
-    }
+    val data = remember { mutableStateListOf<CommonListItemContainer>().apply { addAll(createDummyListItems(400)) } }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -43,7 +43,14 @@ fun LazyColumnScreen() {
             data = data,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(contentPadding)
+                .padding(contentPadding),
+            onClickItem = { clickedItem ->
+                val index = data.indexOfFirst { it is CommonListItemContainer.Entry && it.id == clickedItem.id }
+                if (index != -1) {
+                    val entry = data[index] as CommonListItemContainer.Entry
+                    data[index] = entry.copy(content = entry.content + ".Clicked")
+                }
+            }
         )
     }
 }
@@ -51,7 +58,8 @@ fun LazyColumnScreen() {
 @Composable
 private fun ListItemSection(
     data: ImmutableList<CommonListItemContainer>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClickItem: (CommonListItemContainer.Entry) -> Unit = {}
 ) {
     LazyColumn(
         modifier = modifier
@@ -72,7 +80,13 @@ private fun ListItemSection(
                     HeaderItem()
                 }
                 is CommonListItemContainer.Entry -> {
-                    EntryItem(item)
+                    EntryItem(
+                        item,
+                        modifier = Modifier,
+                        onClickItem = {
+                            onClickItem(item)
+                        }
+                    )
                 }
                 is CommonListItemContainer.Footer -> {
                     FooterItem(item)
@@ -98,13 +112,18 @@ private fun HeaderItem() {
 
 @Composable
 private fun EntryItem(
-    item: CommonListItemContainer.Entry
+    item: CommonListItemContainer.Entry,
+    modifier: Modifier = Modifier,
+    onClickItem: () -> Unit = {}
 ) = trace("EntryItem") {
-    Column {
+    Column (
+        modifier = modifier
+    ) {
         ListItem(
             headlineContent = { Text(text = item.content) },
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .clickable { onClickItem() },
             overlineContent = { Text(text = "ID ${item.id}") },
             leadingContent = {
                 Image(
