@@ -16,8 +16,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -34,21 +37,27 @@ import kotlinx.collections.immutable.toImmutableList
 
 @Composable
 fun LazyColumnScreen() {
-    val data = remember { mutableStateListOf<CommonListItemContainer>().apply { addAll(createDummyListItems(400)) } }
+    var data by remember {
+        mutableStateOf(createDummyListItems(400))
+    }
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
     ) { contentPadding ->
         ListItemSection(
-            data = data,
+            data = data.toImmutableList(),
             modifier = Modifier
                 .fillMaxSize()
                 .padding(contentPadding),
             onClickItem = { clickedItem ->
-                val index = data.indexOfFirst { it is CommonListItemContainer.Entry && it.id == clickedItem.id }
-                if (index != -1) {
-                    val entry = data[index] as CommonListItemContainer.Entry
-                    data[index] = entry.copy(content = entry.content + ".Clicked")
+                data = data.map {
+                    if (it is CommonListItemContainer.Entry && it.id == clickedItem.id) {
+                        it.copy(
+                            content = it.content + ".Clicked"
+                        )
+                    } else {
+                        it
+                    }
                 }
             }
         )
