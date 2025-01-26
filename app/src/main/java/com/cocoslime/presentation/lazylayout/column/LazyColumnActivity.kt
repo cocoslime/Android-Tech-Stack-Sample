@@ -2,20 +2,28 @@ package com.cocoslime.presentation.lazylayout.column
 
 import android.os.Bundle
 import android.widget.Toast
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.testTagsAsResourceId
 import com.cocoslime.presentation.BuildConfig
+import com.cocoslime.presentation.common.base.BaseActivity
 
-class LazyColumnActivity: ComponentActivity() {
+@OptIn(ExperimentalComposeUiApi::class)
+class LazyColumnActivity: BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
         setContent {
             MaterialTheme {
-                LazyColumnScreen()
+                LazyColumnScreen(
+                    modifier = Modifier
+                        .semantics { this.testTagsAsResourceId = true }
+                )
             }
         }
 

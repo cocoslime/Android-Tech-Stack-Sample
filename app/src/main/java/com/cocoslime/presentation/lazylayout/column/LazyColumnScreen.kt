@@ -14,33 +14,51 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.util.trace
 import coil.compose.rememberAsyncImagePainter
 import com.cocoslime.presentation.common.list.CommonListItemContainer
-import com.cocoslime.presentation.common.list.dummyListItems
+import com.cocoslime.presentation.common.list.createDummyListItems
+import com.cocoslime.presentation.common.recomposeHighlighter
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 
 @Composable
-fun LazyColumnScreen() {
-    val data = remember { mutableStateListOf<CommonListItemContainer>().apply { addAll(dummyListItems) } }
+fun LazyColumnScreen(
+    modifier: Modifier = Modifier
+) {
+    var data by remember {
+        mutableStateOf(createDummyListItems(400))
+    }
 
     Scaffold(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize()
+            .testTag("lazy_column_screen"),
     ) { contentPadding ->
         ListItemSection(
-            data = data,
+            data = data.toImmutableList(),
             modifier = Modifier
+                .padding(contentPadding)
                 .fillMaxSize()
-                .padding(contentPadding),
+                .testTag("list_of_items"),
             onClickItem = { clickedItem ->
-                val index = data.indexOfFirst { it is CommonListItemContainer.Entry && it.id == clickedItem.id }
-                if (index != -1) {
-                    val entry = data[index] as CommonListItemContainer.Entry
-                    data[index] = entry.copy(content = entry.content + ".Clicked")
+                data = data.map {
+                    if (it is CommonListItemContainer.Entry && it.id == clickedItem.id) {
+                        it.copy(
+                            content = it.content + ".Clicked"
+                        )
+                    } else {
+                        it
+                    }
                 }
             }
         )
@@ -49,12 +67,13 @@ fun LazyColumnScreen() {
 
 @Composable
 private fun ListItemSection(
-    data: List<CommonListItemContainer>,
+    data: ImmutableList<CommonListItemContainer>,
     modifier: Modifier = Modifier,
     onClickItem: (CommonListItemContainer.Entry) -> Unit = {}
 ) {
     LazyColumn(
         modifier = modifier
+            .recomposeHighlighter(),
     ) {
         items(
             count = data.size,
@@ -105,7 +124,7 @@ private fun EntryItem(
     item: CommonListItemContainer.Entry,
     modifier: Modifier = Modifier,
     onClickItem: () -> Unit = {}
-) {
+) = trace("EntryItem") {
     Column (
         modifier = modifier
     ) {
