@@ -7,8 +7,9 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.material3.MaterialTheme
 import com.cocoslime.presentation.BuildConfig
+import com.cocoslime.presentation.common.base.BaseActivity
 
-class LazyColumnActivity: ComponentActivity() {
+class LazyColumnActivity: BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
