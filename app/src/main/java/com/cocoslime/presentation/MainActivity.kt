@@ -37,6 +37,10 @@ class MainActivity : BaseActivity() {
             }
         }
 
+        initStartCondition()
+    }
+
+    private fun initStartCondition() {
         val startFromStep = intent.getStringExtra(EXTRA_START_TASK)
         when(startFromStep) {
             "LazyColumn" -> {

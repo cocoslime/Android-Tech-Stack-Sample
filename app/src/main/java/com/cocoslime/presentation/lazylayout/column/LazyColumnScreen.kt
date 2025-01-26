@@ -1,8 +1,6 @@
 package com.cocoslime.presentation.lazylayout.column
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,12 +15,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,19 +32,24 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 
 @Composable
-fun LazyColumnScreen() {
+fun LazyColumnScreen(
+    modifier: Modifier = Modifier
+) {
     var data by remember {
         mutableStateOf(createDummyListItems(400))
     }
 
     Scaffold(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize()
+            .testTag("lazy_column_screen"),
     ) { contentPadding ->
         ListItemSection(
             data = data.toImmutableList(),
             modifier = Modifier
+                .padding(contentPadding)
                 .fillMaxSize()
-                .padding(contentPadding),
+                .testTag("list_of_items"),
             onClickItem = { clickedItem ->
                 data = data.map {
                     if (it is CommonListItemContainer.Entry && it.id == clickedItem.id) {
@@ -72,7 +73,6 @@ private fun ListItemSection(
 ) {
     LazyColumn(
         modifier = modifier
-            .testTag("list_of_items")
             .recomposeHighlighter(),
     ) {
         items(
