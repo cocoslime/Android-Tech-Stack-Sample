@@ -36,6 +36,13 @@ class MainActivity : BaseActivity() {
                 MainScreen()
             }
         }
+
+        val startFromStep = intent.getStringExtra(EXTRA_START_TASK)
+        when(startFromStep) {
+            "LazyColumn" -> {
+                startActivity(Intent(this, LazyColumnActivity::class.java))
+            }
+        }
     }
 
     @Composable
