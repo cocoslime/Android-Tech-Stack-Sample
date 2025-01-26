@@ -45,8 +45,8 @@ dependencies {
     implementation(libs.androidx.uiautomator)
     implementation(libs.androidx.benchmark.macro.junit4)
 
-    implementation("androidx.tracing:tracing-perfetto:1.0.0")
-    implementation("androidx.tracing:tracing-perfetto-binary:1.0.0")
+    implementation(libs.androidx.tracing.perfetto)
+    implementation(libs.androidx.tracing.perfetto.binary)
 }
 
 androidComponents {

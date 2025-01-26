@@ -102,4 +102,6 @@ dependencies {
     implementation(libs.retrofit.converter.serialization)
     implementation(libs.okhttp)
     implementation(libs.okhttp.logging)
+
+    implementation(libs.androidx.compose.runtime.tracing)
 }
