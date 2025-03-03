@@ -18,16 +18,21 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.util.trace
 import coil.compose.rememberAsyncImagePainter
+import com.cocoslime.presentation.R
 import com.cocoslime.presentation.common.list.CommonListItemContainer
 import com.cocoslime.presentation.common.list.createDummyListItems
 import com.cocoslime.presentation.common.recomposeHighlighter
+import com.skydoves.landscapist.ImageOptions
+import com.skydoves.landscapist.coil.CoilImage
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 
@@ -135,13 +140,14 @@ private fun EntryItem(
                 .clickable { onClickItem() },
             overlineContent = { Text(text = "ID ${item.id}") },
             leadingContent = {
-                Image(
-                    modifier = Modifier.size(100.dp),
-                    painter = rememberAsyncImagePainter(
-                        model = item.imageUrl
+                CoilImage(
+                    imageModel = { item.imageUrl }, // loading a network image using an URL.
+                    imageOptions = ImageOptions(
+                        contentScale = ContentScale.Crop,
+                        alignment = Alignment.Center
                     ),
-                    contentScale = ContentScale.Crop,
-                    contentDescription = null
+                    modifier = Modifier.size(100.dp),
+                    previewPlaceholder = painterResource(id = R.drawable.ic_launcher_foreground),
                 )
             },
         )

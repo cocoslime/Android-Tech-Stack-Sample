@@ -93,6 +93,8 @@ dependencies {
     // coil
     implementation(libs.coil)
     implementation(libs.coil.compose)
+    // landscapist (https://github.com/skydoves/landscapist)
+    implementation("com.github.skydoves:landscapist-coil:2.4.0")
 
     implementation(libs.paging.runtime)
     implementation(libs.glide)
