@@ -55,7 +55,7 @@ class FragmentNavActivity : FragmentActivity() {
                 label = getString(R.string.destination_screen_title)
             }
             fragment<VmDestinationFragment, FragmentNavRoute.VmDestinationArgs>() {
-                label = getString(R.string.other_destination_screen_title)
+                label = getString(R.string.vm_destination_screen_title)
             }
         }
 

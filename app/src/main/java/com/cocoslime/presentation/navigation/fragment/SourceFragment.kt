@@ -42,14 +42,14 @@ class SourceFragment : Fragment() {
 
             setContent {
                 SourceScreen(
-                    onNavigateDestination = {
+                    navigateToDestination = {
                         findNavController().navigate(
                             route = FragmentNavRoute.DestinationArgs(
                                 message = it
                             )
                         )
                     },
-                    onNavigateOtherDestination = {
+                    navigateToVmDestination = {
                         findNavController().navigate(
                             route = FragmentNavRoute.VmDestinationArgs(
                                 message = it
@@ -63,8 +63,8 @@ class SourceFragment : Fragment() {
 
     @Composable
     private fun SourceScreen(
-        onNavigateDestination: (String) -> Unit,
-        onNavigateOtherDestination: (String) -> Unit,
+        navigateToDestination: (String) -> Unit,
+        navigateToVmDestination: (String) -> Unit,
     ) {
         var message by remember { mutableStateOf("") }
         var otherMessage by remember { mutableStateOf("") }
@@ -102,17 +102,17 @@ class SourceFragment : Fragment() {
                     confirmButtonText = getString(R.string.next_button_text),
                     modifier = Modifier.weight(1f),
                 ) { message ->
-                    onNavigateDestination(message)
+                    navigateToDestination(message)
                 }
 
                 CommonSection(
                     title = "",
                     message = otherMessage ?: "",
                     isTextFieldVisible = true,
-                    confirmButtonText = getString(R.string.other_destination_screen_title),
+                    confirmButtonText = getString(R.string.vm_destination_screen_title),
                     modifier = Modifier.weight(1f),
                 ) { message ->
-                    onNavigateOtherDestination(message)
+                    navigateToVmDestination(message)
                 }
             }
         }
