@@ -1,6 +1,5 @@
-# Presentation Sample Archive
-
-Android Application 의 Presentation Layer(UI Layer) 에 대한 샘플 코드 모음 Repository 입니다. 
+# Android Tech Stack Sample
+Android Application 에 대한 샘플 코드 모음 Repository 입니다. 
 
 ## Navigation
 
