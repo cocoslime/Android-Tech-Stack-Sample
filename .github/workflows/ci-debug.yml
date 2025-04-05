@@ -1,9 +1,6 @@
 name: Debug CI
 
-on:
-  push:
-    branches:
-      - *
+on: [push]
 
 
 jobs:
