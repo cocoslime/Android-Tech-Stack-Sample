@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.cocoslime.presentation.common.StartActivityButton
 import com.cocoslime.presentation.navigation.activity.SourceNavActivity
 import com.cocoslime.presentation.navigation.compose.ComposeNavActivity
-import com.cocoslime.presentation.navigation.fragment.FragmentNavActivity
+import com.cocoslime.presentation.navigation.fragment.dsl.FragmentNavActivity
 
 class NavigationActivity : ComponentActivity() {
 

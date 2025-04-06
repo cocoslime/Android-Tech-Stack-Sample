@@ -1,4 +1,4 @@
-package com.cocoslime.presentation.navigation.fragment
+package com.cocoslime.presentation.navigation.fragment.dsl
 
 import android.os.Build
 import android.os.Bundle

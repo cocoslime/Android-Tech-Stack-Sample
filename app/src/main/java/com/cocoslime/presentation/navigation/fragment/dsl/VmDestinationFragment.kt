@@ -1,4 +1,4 @@
-package com.cocoslime.presentation.navigation.fragment
+package com.cocoslime.presentation.navigation.fragment.dsl
 
 import android.os.Bundle
 import android.os.Parcelable
@@ -11,15 +11,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.toRoute
 import com.cocoslime.presentation.R
 import com.cocoslime.presentation.common.CommonSection
-import com.cocoslime.presentation.common.FRAGMENT_RESULT_KEY
+import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
 
-class DestinationFragment: Fragment() {
+class VmDestinationFragment: Fragment() {
+
+    private val viewModel: VmDestinationViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,29 +32,33 @@ class DestinationFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        val args = findNavController()
-            .getBackStackEntry<FragmentNavRoute.DestinationArgs>()
-            .toRoute<FragmentNavRoute.DestinationArgs>()
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                // ViewModel 의 SavedStateHandle 로 가져오는 것과 동일하다.
+                // 단, backStackEntry 의 SavedStateHandle 로는 가져올 수 없다.
+                findNavController().currentBackStackEntry?.toRoute<FragmentNavRoute.VmDestinationArgs>()?.also {
+                    println("VmDestinationFragment\ncurrentBackStackEntry.toRoute: $it")
+                }
+            }
+        }
 
         return ComposeView(requireContext()).apply {
-            // Dispose of the Composition when the view's LifecycleOwner
-            // is destroyed
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
 
             setContent {
                 MaterialTheme {
                     CommonSection(
-                        title = getString(R.string.destination_screen_title),
-                        message = args.message,
+                        title = getString(R.string.vm_destination_screen_title),
+                        message = viewModel.args.message,
                         isTextFieldVisible = true,
                         confirmButtonText = getString(R.string.prev_button_text),
                         modifier = Modifier.fillMaxSize(),
                     ) {
-                        // 결과를 설정합니다.
-                        val result = Bundle().apply {
-                            putParcelable(FRAGMENT_RESULT_KEY, Result(it))
-                        }
-                        setFragmentResult(Result.KEY, result)
+                        // 결과를 설정합니다. previousBackStackEntry
+                        findNavController().previousBackStackEntry?.savedStateHandle?.set(
+                            Result.KEY,
+                            Result(it)
+                        )
 
                         findNavController().popBackStack()
                     }
