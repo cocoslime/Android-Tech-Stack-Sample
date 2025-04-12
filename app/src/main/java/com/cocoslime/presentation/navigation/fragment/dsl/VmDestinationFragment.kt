@@ -19,6 +19,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.toRoute
 import com.cocoslime.presentation.R
 import com.cocoslime.presentation.common.CommonSection
+import com.cocoslime.presentation.navigation.fragment.FragmentNavRoute
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
 

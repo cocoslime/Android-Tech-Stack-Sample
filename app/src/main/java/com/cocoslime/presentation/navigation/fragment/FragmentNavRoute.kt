@@ -1,4 +1,4 @@
-package com.cocoslime.presentation.navigation.fragment.dsl
+package com.cocoslime.presentation.navigation.fragment
 
 import androidx.annotation.Keep
 import kotlinx.serialization.Serializable
