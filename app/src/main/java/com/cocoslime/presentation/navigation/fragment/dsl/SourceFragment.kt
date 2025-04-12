@@ -5,28 +5,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.imePadding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.clearFragmentResultListener
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
-import com.cocoslime.presentation.R
-import com.cocoslime.presentation.common.CommonSection
 import com.cocoslime.presentation.common.FRAGMENT_RESULT_KEY
+import com.cocoslime.presentation.navigation.fragment.FragmentNavRoute
+import com.cocoslime.presentation.navigation.fragment.component.SourceScreen
 
 class SourceFragment : Fragment() {
 
@@ -41,7 +34,33 @@ class SourceFragment : Fragment() {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
 
             setContent {
+                var message by remember { mutableStateOf("") }
+
+                DisposableEffect(Unit) {
+                    setDestinationResultListener {
+                        message = it.resultMessage
+                    }
+
+                    onDispose {
+                        clearFragmentResultListener(DestinationFragment.Result.KEY)
+                    }
+                }
+
+                var otherMessage by remember { mutableStateOf("") }
+
+                LaunchedEffect(key1 = Unit) {
+                    // ViewModel 의 SavedStateHandle 로 가져올 수 없음
+                    findNavController().currentBackStackEntry?.savedStateHandle?.getStateFlow<VmDestinationFragment.Result?>(
+                        key = VmDestinationFragment.Result.KEY,
+                        initialValue = null
+                    )?.collect {
+                        otherMessage = it?.resultMessage ?: ""
+                    }
+                }
+
                 SourceScreen(
+                    message = message,
+                    otherMessage = otherMessage,
                     navigateToDestination = {
                         findNavController().navigate(
                             route = FragmentNavRoute.DestinationArgs(
@@ -57,63 +76,6 @@ class SourceFragment : Fragment() {
                         )
                     }
                 )
-            }
-        }
-    }
-
-    @Composable
-    private fun SourceScreen(
-        navigateToDestination: (String) -> Unit,
-        navigateToVmDestination: (String) -> Unit,
-    ) {
-        var message by remember { mutableStateOf("") }
-        var otherMessage by remember { mutableStateOf("") }
-
-        DisposableEffect(Unit) {
-            setDestinationResultListener {
-                message = it.resultMessage
-            }
-
-            onDispose {
-                clearFragmentResultListener(DestinationFragment.Result.KEY)
-            }
-        }
-
-        LaunchedEffect(key1 = Unit) {
-            // ViewModel 의 SavedStateHandle 로 가져올 수 없음
-            findNavController().currentBackStackEntry?.savedStateHandle?.getStateFlow<VmDestinationFragment.Result?>(
-                key = VmDestinationFragment.Result.KEY,
-                initialValue = null
-            )?.collect {
-                otherMessage = it?.resultMessage ?: ""
-            }
-        }
-
-        MaterialTheme {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .imePadding()
-            ) {
-                CommonSection(
-                    title = getString(R.string.source_screen_title),
-                    message = message,
-                    isTextFieldVisible = true,
-                    confirmButtonText = getString(R.string.next_button_text),
-                    modifier = Modifier.weight(1f),
-                ) { message ->
-                    navigateToDestination(message)
-                }
-
-                CommonSection(
-                    title = "",
-                    message = otherMessage ?: "",
-                    isTextFieldVisible = true,
-                    confirmButtonText = getString(R.string.vm_destination_screen_title),
-                    modifier = Modifier.weight(1f),
-                ) { message ->
-                    navigateToVmDestination(message)
-                }
             }
         }
     }
