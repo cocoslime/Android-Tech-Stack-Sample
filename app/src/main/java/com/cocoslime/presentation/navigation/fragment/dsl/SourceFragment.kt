@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -33,48 +34,50 @@ class SourceFragment : Fragment() {
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
 
             setContent {
-                var message by remember { mutableStateOf("") }
+                MaterialTheme {
+                    var message by remember { mutableStateOf("") }
 
-                DisposableEffect(Unit) {
-                    setDestinationResultListener {
-                        message = it.resultMessage
+                    DisposableEffect(Unit) {
+                        setDestinationResultListener {
+                            message = it.resultMessage
+                        }
+
+                        onDispose {
+                            clearFragmentResultListener(DestinationFragment.Result.KEY)
+                        }
                     }
 
-                    onDispose {
-                        clearFragmentResultListener(DestinationFragment.Result.KEY)
+                    var otherMessage by remember { mutableStateOf("") }
+
+                    LaunchedEffect(key1 = Unit) {
+                        // ViewModel 의 SavedStateHandle 로 가져올 수 없음
+                        findNavController().currentBackStackEntry?.savedStateHandle?.getStateFlow<VmDestinationFragment.Result?>(
+                            key = VmDestinationFragment.Result.KEY,
+                            initialValue = null
+                        )?.collect {
+                            otherMessage = it?.resultMessage ?: ""
+                        }
                     }
-                }
 
-                var otherMessage by remember { mutableStateOf("") }
-
-                LaunchedEffect(key1 = Unit) {
-                    // ViewModel 의 SavedStateHandle 로 가져올 수 없음
-                    findNavController().currentBackStackEntry?.savedStateHandle?.getStateFlow<VmDestinationFragment.Result?>(
-                        key = VmDestinationFragment.Result.KEY,
-                        initialValue = null
-                    )?.collect {
-                        otherMessage = it?.resultMessage ?: ""
-                    }
-                }
-
-                SourceScreen(
-                    message = message,
-                    otherMessage = otherMessage,
-                    navigateToDestination = {
-                        findNavController().navigate(
-                            route = FragmentNavRoute.DestinationArgs(
-                                message = it
+                    SourceScreen(
+                        message = message,
+                        otherMessage = otherMessage,
+                        navigateToDestination = {
+                            findNavController().navigate(
+                                route = FragmentNavRoute.DestinationArgs(
+                                    message = it
+                                )
                             )
-                        )
-                    },
-                    navigateToVmDestination = {
-                        findNavController().navigate(
-                            route = FragmentNavRoute.VmDestinationArgs(
-                                message = it
+                        },
+                        navigateToVmDestination = {
+                            findNavController().navigate(
+                                route = FragmentNavRoute.VmDestinationArgs(
+                                    message = it
+                                )
                             )
-                        )
-                    }
-                )
+                        }
+                    )
+                }
             }
         }
     }

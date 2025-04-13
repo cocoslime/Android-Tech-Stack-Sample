@@ -10,13 +10,13 @@ import com.cocoslime.presentation.navigation.fragment.dsl.FragmentNavRoute
 
 @Composable
 fun FragmentDestinationScreen(
-    args: FragmentNavRoute.DestinationArgs,
     title: String,
+    message: String,
     onConfirm: (String) -> Unit,
 ) {
     CommonSection(
         title = title,
-        message = args.message,
+        message = message,
         isTextFieldVisible = true,
         confirmButtonText = stringResource(R.string.prev_button_text),
         modifier = Modifier.fillMaxSize(),
