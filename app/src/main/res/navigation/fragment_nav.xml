@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:startDestination="@id/sourceFragment"
+    android:id="@+id/fragment_nav">
+
+    <fragment
+        android:id="@+id/sourceFragment"
+        android:label="SourceFragment"
+        android:name="com.cocoslime.presentation.navigation.fragment.xml.XmlSourceFragment">
+
+        <action
+            android:id="@+id/action_sourceFragment_to_destinationFragment"
+            app:destination="@id/destinationFragment">
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/destinationFragment"
+        android:label="DestinationFragment"
+        android:name="com.cocoslime.presentation.navigation.fragment.xml.XmlDestinationFragment">
+
+        <argument
+            android:name="message"
+            app:argType="string"
+            app:nullable="true"/>
+    </fragment>
+</navigation>

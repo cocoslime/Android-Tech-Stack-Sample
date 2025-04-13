@@ -1,6 +1,8 @@
 package com.cocoslime.presentation.navigation.fragment.component
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -14,12 +16,16 @@ fun FragmentDestinationScreen(
     message: String,
     onConfirm: (String) -> Unit,
 ) {
-    CommonSection(
-        title = title,
-        message = message,
-        isTextFieldVisible = true,
-        confirmButtonText = stringResource(R.string.prev_button_text),
-        modifier = Modifier.fillMaxSize(),
-        onConfirmClick = onConfirm
-    )
+    Scaffold { paddingValues ->
+        CommonSection(
+            title = title,
+            message = message,
+            isTextFieldVisible = true,
+            confirmButtonText = stringResource(R.string.prev_button_text),
+            modifier = Modifier
+                .padding(paddingValues)
+                .fillMaxSize(),
+            onConfirmClick = onConfirm
+        )
+    }
 }
