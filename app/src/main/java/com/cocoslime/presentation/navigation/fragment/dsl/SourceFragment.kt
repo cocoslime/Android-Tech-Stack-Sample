@@ -18,7 +18,6 @@ import androidx.fragment.app.clearFragmentResultListener
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.findNavController
 import com.cocoslime.presentation.common.FRAGMENT_RESULT_KEY
-import com.cocoslime.presentation.navigation.fragment.FragmentNavRoute
 import com.cocoslime.presentation.navigation.fragment.component.SourceScreen
 
 class SourceFragment : Fragment() {

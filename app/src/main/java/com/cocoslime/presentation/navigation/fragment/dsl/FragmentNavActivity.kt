@@ -14,7 +14,6 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import com.cocoslime.presentation.R
 import com.cocoslime.presentation.databinding.ActivityFragmentNavBinding
-import com.cocoslime.presentation.navigation.fragment.FragmentNavRoute
 
 /*
 https://developer.android.com/guide/navigation/design/kotlin-dsl
