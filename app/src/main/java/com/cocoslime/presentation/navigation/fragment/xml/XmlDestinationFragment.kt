@@ -32,7 +32,7 @@ class XmlDestinationFragment : Fragment() {
                 MaterialTheme {
                     FragmentDestinationScreen(
                         title = stringResource(R.string.destination_screen_title),
-                        message = args.message ?: "",
+                        message = args.data?.message ?: "",
                         onConfirm = {
                             findNavController()
                                 .previousBackStackEntry

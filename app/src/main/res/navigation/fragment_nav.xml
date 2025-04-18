@@ -21,8 +21,8 @@
         android:name="com.cocoslime.presentation.navigation.fragment.xml.XmlDestinationFragment">
 
         <argument
-            android:name="message"
-            app:argType="string"
+            android:name="data"
+            app:argType="com.cocoslime.presentation.navigation.fragment.xml.XmlDestinationArgs"
             app:nullable="true"/>
     </fragment>
 </navigation>

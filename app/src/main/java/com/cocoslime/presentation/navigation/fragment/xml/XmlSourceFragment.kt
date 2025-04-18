@@ -44,7 +44,9 @@ class XmlSourceFragment : Fragment() {
                         navigateToDestination = {
                             findNavController().navigate(
                                 XmlSourceFragmentDirections.actionSourceFragmentToDestinationFragment(
-                                    it
+                                    XmlDestinationArgs(
+                                        message = it
+                                    )
                                 )
                             )
                         },
