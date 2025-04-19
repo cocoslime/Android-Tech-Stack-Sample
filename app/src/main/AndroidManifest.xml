@@ -58,7 +58,10 @@
             android:name=".navigation.compose.ComposeNavActivity"
             android:exported="false" />
         <activity
-            android:name=".navigation.fragment.FragmentNavActivity"
+            android:name=".navigation.fragment.dsl.FragmentNavActivity"
+            android:exported="false" />
+        <activity
+            android:name=".navigation.fragment.xml.XmlFragmentNavActivity"
             android:exported="false" />
 
         <!-- RecyclerView -->

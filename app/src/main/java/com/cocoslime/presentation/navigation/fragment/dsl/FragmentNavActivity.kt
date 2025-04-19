@@ -1,5 +1,7 @@
-package com.cocoslime.presentation.navigation.fragment
+package com.cocoslime.presentation.navigation.fragment.dsl
 
+import android.annotation.SuppressLint
+import androidx.navigation.NavController
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
@@ -13,6 +15,9 @@ import kotlinx.coroutines.launch
 import com.cocoslime.presentation.R
 import com.cocoslime.presentation.databinding.ActivityFragmentNavBinding
 
+/*
+https://developer.android.com/guide/navigation/design/kotlin-dsl
+ */
 class FragmentNavActivity : FragmentActivity() {
 
     private var _binding: ActivityFragmentNavBinding? = null
@@ -55,11 +60,23 @@ class FragmentNavActivity : FragmentActivity() {
                 label = getString(R.string.destination_screen_title)
             }
             fragment<VmDestinationFragment, FragmentNavRoute.VmDestinationArgs>() {
-                label = getString(R.string.other_destination_screen_title)
+                label = getString(R.string.vm_destination_screen_title)
             }
         }
 
+        printBackStack(navController)
+    }
 
+    @SuppressLint("RestrictedApi")
+    private fun printBackStack(navController: NavController) {
+        lifecycleScope.launch {
+            navController.currentBackStack.collect {
+                val routes = it
+                    .map { it.destination }
+                    .joinToString(separator = "\n")
+                "======currentBackStack=======\n${routes}\n==============".also(::println)
+            }
+        }
     }
 
     override fun onDestroy() {

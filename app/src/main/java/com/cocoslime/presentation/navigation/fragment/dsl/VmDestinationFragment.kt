@@ -1,4 +1,4 @@
-package com.cocoslime.presentation.navigation.fragment
+package com.cocoslime.presentation.navigation.fragment.dsl
 
 import android.os.Bundle
 import android.os.Parcelable
@@ -48,7 +48,7 @@ class VmDestinationFragment: Fragment() {
             setContent {
                 MaterialTheme {
                     CommonSection(
-                        title = getString(R.string.other_destination_screen_title),
+                        title = getString(R.string.vm_destination_screen_title),
                         message = viewModel.args.message,
                         isTextFieldVisible = true,
                         confirmButtonText = getString(R.string.prev_button_text),
