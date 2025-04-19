@@ -35,8 +35,7 @@ class XmlSourceFragment : Fragment() {
                             key = XmlDestinationFragment.KEY_RESULT,
                             initialValue = ""
                         )
-                        ?.map { if (it.isEmpty()) "Destination(Empty)" else "넘어온 값: $it" }
-                        ?.collectAsStateWithLifecycle(initialValue = "Destination(Init)")
+                        ?.collectAsStateWithLifecycle()
                         ?: remember { mutableStateOf("Destination(null)") }
 
                     SourceScreen(
