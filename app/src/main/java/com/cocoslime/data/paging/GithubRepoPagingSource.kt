@@ -4,7 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.cocoslime.data.model.GithubRepoResponse
 import com.cocoslime.data.service.GithubService
-import com.cocoslime.printlnDebug
+import com.cocoslime.logDebug
 
 class GithubRepoPagingSource (
     private val service: GithubService,
@@ -58,8 +58,12 @@ class GithubRepoPagingSource (
     }
 
     private fun <T: Any> LoadParams<T>.printLog() {
-        "$this".printlnDebug()
-        "loadSize: ${loadSize}".printlnDebug()
-        "key: ${key}".printlnDebug()
+        "$this".logDebug(TAG)
+        "loadSize: ${loadSize}".logDebug(TAG)
+        "key: ${key}".logDebug(TAG)
+    }
+
+    companion object {
+        private const val TAG = "GithubRepoPagingSource"
     }
 }

@@ -1,6 +1,7 @@
 package com.cocoslime.presentation
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -15,6 +16,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.cocoslime.common.CommonConst
+import com.cocoslime.common.CommonConst.HOST_LAZY_COLUMN
 import com.cocoslime.presentation.architecture.orbit.OrbitActivity
 import com.cocoslime.presentation.common.StartActivityButton
 import com.cocoslime.presentation.common.base.BaseActivity
@@ -23,8 +26,7 @@ import com.cocoslime.presentation.navigation.NavigationActivity
 import com.cocoslime.presentation.paging.PagingActivity
 import com.cocoslime.presentation.recyclerview.RecyclerViewActivity
 import com.cocoslime.presentation.viewpager.ViewPagerActivity
-
-const val EXTRA_START_TASK = "EXTRA_START_TASK"
+import com.cocoslime.printlnDebug
 
 class MainActivity : BaseActivity() {
 
@@ -42,13 +44,39 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initStartCondition() {
-        val startFromStep = intent.getStringExtra(EXTRA_START_TASK)
-        when(startFromStep) {
-            "LazyColumn" -> {
-                startActivity(Intent(this, LazyColumnActivity::class.java))
+        val uriFromStartIntent = intent.getStringExtra(CommonConst.INTENT_EXTRA_URI)
+        uriFromStartIntent?.let { uriString ->
+            val uri = parseFromIntentUri(uriString)
+            uri.printlnDebug()
+            when (uri.host) {
+                HOST_LAZY_COLUMN -> {
+                    startActivity(
+                        Intent(this, LazyColumnActivity::class.java).apply {
+                            putExtra(LazyColumnActivity.TYPE, uri.pathSegments.firstOrNull())
+                        }
+                    )
+                }
             }
         }
     }
+
+    private fun parseFromIntentUri(uriString: String): Uri {
+        return try {
+            // "Host/Path" 형식을 표준 Uri 형식으로 변환
+            val normalizedUri = if (!uriString.contains("://") && !uriString.startsWith("/")) {
+                // 스키마가 없는 경우 임의의 스키마 추가 (파싱 목적으로만 사용)
+                "${CommonConst.SCHEME}$uriString"
+            } else {
+                uriString
+            }
+
+            Uri.parse(normalizedUri)
+        } catch (e: Exception) {
+            // 예외 발생 시 기본 Uri 반환
+            Uri.parse(CommonConst.SCHEME)
+        }
+    }
+
 
     @Composable
     private fun MainScreen() {

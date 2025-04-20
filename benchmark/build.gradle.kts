@@ -47,6 +47,8 @@ dependencies {
 
     implementation(libs.androidx.tracing.perfetto)
     implementation(libs.androidx.tracing.perfetto.binary)
+
+    implementation(project(":common"))
 }
 
 androidComponents {

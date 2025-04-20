@@ -11,6 +11,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import com.cocoslime.presentation.BuildConfig
 import com.cocoslime.presentation.common.base.BaseActivity
+import com.cocoslime.presentation.lazylayout.column.benchmark.BenchmarkLazyColumnScreen
 
 @OptIn(ExperimentalComposeUiApi::class)
 class LazyColumnActivity: BaseActivity() {
@@ -20,7 +21,7 @@ class LazyColumnActivity: BaseActivity() {
 
         setContent {
             MaterialTheme {
-                LazyColumnScreen(
+                BenchmarkLazyColumnScreen(
                     modifier = Modifier
                         .semantics { this.testTagsAsResourceId = true }
                 )
@@ -34,5 +35,9 @@ class LazyColumnActivity: BaseActivity() {
                 Toast.LENGTH_LONG
             ).show()
         }
+    }
+
+    companion object {
+        const val TYPE = "type"
     }
 }

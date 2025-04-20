@@ -12,6 +12,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.Until
+import com.cocoslime.common.CommonConst
 import junit.framework.TestCase.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -42,7 +43,7 @@ class LazyColumnScreenBenchmark {
         iterations = 1,
         setupBlock = {
             pressHome()
-            startTaskActivity("LazyColumn")
+            startTaskActivity("${CommonConst.HOST_LAZY_COLUMN}/benchmark")
         },
         measureBlock = {
             val screenSearchCondition = Until.hasObject(By.res("lazy_column_screen"))
