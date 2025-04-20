@@ -28,6 +28,7 @@ okhttp = "4.12.0"
 uiautomator = "2.2.0"
 tracing-perfetto = "1.0.0"
 compose-runtime-tracing="1.7.6"
+jetbrainsKotlinJvm = "2.0.10"
 
 # Benchmark
 benchmarkMacroJunit4 = "1.3.3"
@@ -97,3 +98,4 @@ android-test = { id = "com.android.test", version.ref = "agp" }
 androidx-baselineprofile = { id = "androidx.baselineprofile", version.ref = "androidx-baselineprofile" }
 androidx-navigation-safeargs = { id = "androidx.navigation.safeargs", version.ref = "androidx-navigation" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
