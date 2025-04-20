@@ -19,6 +19,7 @@ import com.cocoslime.presentation.common.recomposeHighlighter
 import com.cocoslime.presentation.lazylayout.column.component.EntryItem
 import com.cocoslime.presentation.lazylayout.column.component.FooterItem
 import com.cocoslime.presentation.lazylayout.column.component.HeaderItem
+import com.cocoslime.presentation.lazylayout.column.component.contentType
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 
@@ -93,14 +94,6 @@ private fun ListItemSection(
                 }
             }
         }
-    }
-}
-
-private fun CommonListItemContainer.contentType(): Int {
-    return when (this) {
-        is CommonListItemContainer.Header -> 0
-        is CommonListItemContainer.Entry -> 1
-        is CommonListItemContainer.Footer -> 2
     }
 }
 

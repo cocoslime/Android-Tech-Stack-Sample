@@ -52,7 +52,7 @@ class MainActivity : BaseActivity() {
                 HOST_LAZY_COLUMN -> {
                     startActivity(
                         Intent(this, LazyColumnActivity::class.java).apply {
-                            putExtra(LazyColumnActivity.TYPE, uri.pathSegments.firstOrNull())
+                            putExtra(LazyColumnActivity.INTENT_EXTRA_KEY_TYPE, uri.pathSegments.firstOrNull())
                         }
                     )
                 }
@@ -124,7 +124,12 @@ class MainActivity : BaseActivity() {
                 activity = this@MainActivity,
                 clazz = LazyColumnActivity::class.java,
                 buttonText = "LazyColumn",
-            )
+            ) {
+                it.putExtra(
+                    LazyColumnActivity.INTENT_EXTRA_KEY_TYPE,
+                    "RECOMPOSITION"
+                )
+            }
         }
     }
 }

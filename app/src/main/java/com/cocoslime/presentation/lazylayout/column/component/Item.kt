@@ -75,3 +75,11 @@ fun FooterItem(item: CommonListItemContainer.Footer) {
             .fillMaxWidth(),
     )
 }
+
+fun CommonListItemContainer.contentType(): Int {
+    return when (this) {
+        is CommonListItemContainer.Header -> 0
+        is CommonListItemContainer.Entry -> 1
+        is CommonListItemContainer.Footer -> 2
+    }
+}

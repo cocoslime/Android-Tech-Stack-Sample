@@ -14,7 +14,8 @@ import androidx.compose.ui.Modifier
 fun <T> StartActivityButton(
     activity: Activity,
     clazz: Class<T>,
-    buttonText: String
+    buttonText: String,
+    intentExtraBuilder: ((Intent) -> Unit)? = null,
 ) {
     Button(
         modifier = Modifier
@@ -25,7 +26,9 @@ fun <T> StartActivityButton(
                 Intent(
                     activity,
                     clazz
-                )
+                ).apply {
+                    intentExtraBuilder?.invoke(this)
+                }
             )
         },
     ) {
