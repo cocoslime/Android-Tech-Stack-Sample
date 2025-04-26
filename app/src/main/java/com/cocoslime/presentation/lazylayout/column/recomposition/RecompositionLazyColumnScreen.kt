@@ -21,6 +21,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -32,6 +33,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.cocoslime.presentation.R
 import com.cocoslime.presentation.common.list.CommonListItemContainer
+import com.cocoslime.presentation.common.list.createDummyItem
 import com.cocoslime.presentation.common.list.createDummyListItems
 import com.cocoslime.presentation.common.recomposeHighlighter
 import com.cocoslime.presentation.lazylayout.column.component.FooterItem
@@ -41,15 +43,16 @@ import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.coil.CoilImage
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
-import java.util.UUID
+
+private const val TAG = "RecompositionTest"
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun RecompositionLazyColumnScreen(
     modifier: Modifier = Modifier,
-    initialData: ImmutableList<CommonListItemContainer> = createDummyListItems(10).toImmutableList(),
+    initialData: List<CommonListItemContainer> = createDummyListItems(10),
 ) {
-    val data = remember {
+    val data = remember(initialData) {
         initialData.toMutableStateList()
     }
     var selectedTab by remember { mutableStateOf(0) }
@@ -73,11 +76,7 @@ fun RecompositionLazyColumnScreen(
                 Button(
                     onClick = {
                         // 항목 추가
-                        data.add(CommonListItemContainer.Entry(
-                            id = data.size.toLong(),
-                            imageUrl = "https://example.com/image${data.size}.jpg",
-                            content = "Item ${data.size}"
-                        ))
+                        data.add(createDummyItem())
                     },
                 ) {
                     Text("Add Item")
@@ -85,24 +84,16 @@ fun RecompositionLazyColumnScreen(
 
                 Button(onClick = {
                     val middle = data.size / 2
-                    data.add(middle, CommonListItemContainer.Entry(
-                        id = UUID.randomUUID().mostSignificantBits,
-                        imageUrl = "https://example.com/image${data.size}.jpg",
-                        content = "Item ${data.size}"
-                    ))
+                    data.add(middle, createDummyItem())
                 }) {
                     // 중간에 항목 추가
                     Text("Insert Middle")
                 }
 
                 Button(onClick = {
-                    if (data.isNotEmpty()) {
-                        val indexToRemove = data.indices.random()
-                        data.removeAt(indexToRemove)
-                    }
+                    if (data.size > 1) { data.removeAt(1) }
                 }) {
-                    // 랜덤 항목 제거
-                    Text("Remove Random")
+                    Text("Remove First")
                 }
 
                 Button(onClick = {
@@ -135,7 +126,7 @@ fun RecompositionLazyColumnScreen(
                 Tab(
                     selected = selectedTab == 2,
                     onClick = { selectedTab = 2 },
-                    text = { Text("Key,ContentType") }
+                    text = { Text("Key\nContentType") }
                 )
             }
 
@@ -175,7 +166,7 @@ private fun LazyColumnWithoutKey(
                 is CommonListItemContainer.Entry -> {
                     RecompositionEntryItem(
                         item,
-                        hasKey = false,
+                        keyTypeString = "withoutKey",
                         modifier = Modifier,
                     )
                 }
@@ -209,7 +200,7 @@ private fun LazyColumnWithKey(
                 is CommonListItemContainer.Entry -> {
                     RecompositionEntryItem(
                         item,
-                        hasKey = true,
+                        keyTypeString = "withKey",
                         modifier = Modifier,
                     )
                 }
@@ -246,7 +237,7 @@ private fun LazyColumnWithKeyContentType(
                 is CommonListItemContainer.Entry -> {
                     RecompositionEntryItem(
                         item,
-                        hasKey = true,
+                        keyTypeString = "withKeyContentType",
                         modifier = Modifier,
                     )
                 }
@@ -261,19 +252,16 @@ private fun LazyColumnWithKeyContentType(
 @Composable
 private fun RecompositionEntryItem(
     item: CommonListItemContainer.Entry,
-    hasKey: Boolean,
+    keyTypeString: String,
     modifier: Modifier = Modifier,
 ) {
-    val TAG = "RecompositionTest"
-    val keyTypeString = if (hasKey) "WithKey" else "WithoutKey"
-
     // 각 항목의 재구성 횟수 추적
-    val recompositionCount = remember { mutableStateOf(0) }
-    recompositionCount.value++
+    val recompositionCount = remember { mutableIntStateOf(0) }
 
-    // SideEffect를 사용하여 로깅 (재구성될 때마다 호출됨)
+    // SideEffect 를 사용하여 로깅 (재구성될 때마다 호출됨)
     SideEffect {
-        Log.d(TAG, "Item $item $keyTypeString recomposed: ${recompositionCount.value} times")
+        recompositionCount.intValue++
+        Log.d(TAG, "Item ${item.content} $keyTypeString recomposed: ${recompositionCount.intValue} times")
     }
 
     Column (
@@ -284,7 +272,7 @@ private fun RecompositionEntryItem(
             modifier = Modifier
                 .fillMaxWidth(),
             supportingContent = {
-                Text(text = "Recomposition(${recompositionCount.value})")
+                Text(text = "Recomposition(${recompositionCount.intValue})")
             },
             overlineContent = { Text(text = "ID ${item.id}") },
             leadingContent = {
