@@ -36,14 +36,14 @@ class LazyColumnScreenBenchmark {
 
     @Test
     fun scrollUp() = benchmarkRule.measureRepeated(
-        packageName = "com.cocoslime.presentation",
+        packageName = TARGET_PACKAGE,
         metrics = metrics,
         compilationMode = CompilationMode.Full(),
         startupMode = StartupMode.WARM, // TODO: COLD 이면 에러(Why?)
         iterations = 1,
         setupBlock = {
             pressHome()
-            startTaskActivity("${CommonConst.HOST_LAZY_COLUMN}/benchmark")
+            startTaskActivity("${CommonConst.HOST_LAZY_COLUMN}/BENCHMARK")
         },
         measureBlock = {
             val screenSearchCondition = Until.hasObject(By.res("lazy_column_screen"))
@@ -61,4 +61,8 @@ class LazyColumnScreenBenchmark {
             }
         }
     )
+
+    companion object {
+        private const val TARGET_PACKAGE = "com.cocoslime.presentation"
+    }
 }

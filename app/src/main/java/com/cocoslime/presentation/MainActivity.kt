@@ -7,11 +7,14 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,10 +43,15 @@ class MainActivity : BaseActivity() {
             }
         }
 
-        initStartCondition()
+        intent?.let { initStartCondition(it) }
     }
 
-    private fun initStartCondition() {
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        initStartCondition(intent)
+    }
+
+    private fun initStartCondition(intent: Intent) {
         val uriFromStartIntent = intent.getStringExtra(CommonConst.INTENT_EXTRA_URI)
         uriFromStartIntent?.let { uriString ->
             val uri = parseFromIntentUri(uriString)
@@ -120,15 +128,38 @@ class MainActivity : BaseActivity() {
             )
 
             // LazyColumnActivity
-            StartActivityButton(
-                activity = this@MainActivity,
-                clazz = LazyColumnActivity::class.java,
-                buttonText = "LazyColumn",
+            Text(
+                text = "LazyColumn",
+                modifier = Modifier.fillMaxWidth(),
+                style = MaterialTheme.typography.titleSmall,
+            )
+
+            Row (
+                horizontalArrangement = Arrangement.spacedBy(space = 8.dp),
             ) {
-                it.putExtra(
-                    LazyColumnActivity.INTENT_EXTRA_KEY_TYPE,
-                    "RECOMPOSITION"
-                )
+                StartActivityButton(
+                    activity = this@MainActivity,
+                    clazz = LazyColumnActivity::class.java,
+                    buttonText = "BENCHMARK",
+                    modifier = Modifier.weight(1f),
+                ) {
+                    it.putExtra(
+                        LazyColumnActivity.INTENT_EXTRA_KEY_TYPE,
+                        "BENCHMARK"
+                    )
+                }
+
+                StartActivityButton(
+                    activity = this@MainActivity,
+                    clazz = LazyColumnActivity::class.java,
+                    buttonText = "RECOMPOSITION",
+                    modifier = Modifier.weight(1f),
+                ) {
+                    it.putExtra(
+                        LazyColumnActivity.INTENT_EXTRA_KEY_TYPE,
+                        "RECOMPOSITION"
+                    )
+                }
             }
         }
     }
