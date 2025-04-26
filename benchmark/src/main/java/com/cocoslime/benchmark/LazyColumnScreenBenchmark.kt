@@ -12,6 +12,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.Until
+import com.cocoslime.common.CommonConst
 import junit.framework.TestCase.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -35,14 +36,14 @@ class LazyColumnScreenBenchmark {
 
     @Test
     fun scrollUp() = benchmarkRule.measureRepeated(
-        packageName = "com.cocoslime.presentation",
+        packageName = TARGET_PACKAGE,
         metrics = metrics,
         compilationMode = CompilationMode.Full(),
         startupMode = StartupMode.WARM, // TODO: COLD 이면 에러(Why?)
         iterations = 1,
         setupBlock = {
             pressHome()
-            startTaskActivity("LazyColumn")
+            startTaskActivity("${CommonConst.HOST_LAZY_COLUMN}/BENCHMARK")
         },
         measureBlock = {
             val screenSearchCondition = Until.hasObject(By.res("lazy_column_screen"))
@@ -60,4 +61,8 @@ class LazyColumnScreenBenchmark {
             }
         }
     )
+
+    companion object {
+        private const val TARGET_PACKAGE = "com.cocoslime.presentation"
+    }
 }

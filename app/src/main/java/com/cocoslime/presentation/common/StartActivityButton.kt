@@ -14,10 +14,12 @@ import androidx.compose.ui.Modifier
 fun <T> StartActivityButton(
     activity: Activity,
     clazz: Class<T>,
-    buttonText: String
+    buttonText: String,
+    modifier: Modifier = Modifier,
+    intentExtraBuilder: ((Intent) -> Unit)? = null,
 ) {
     Button(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth(),
         shape = MaterialTheme.shapes.large,
         onClick = {
@@ -25,7 +27,9 @@ fun <T> StartActivityButton(
                 Intent(
                     activity,
                     clazz
-                )
+                ).apply {
+                    intentExtraBuilder?.invoke(this)
+                }
             )
         },
     ) {

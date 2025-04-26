@@ -8,6 +8,10 @@ import com.cocoslime.presentation.R
 import com.cocoslime.presentation.databinding.ActivityFragmentNavBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * https://developer.android.com/guide/navigation/use-graph/safe-args#kts
+ * https://developer.android.com/guide/navigation/design#xml
+ */
 @AndroidEntryPoint
 class XmlFragmentNavActivity : FragmentActivity() {
 

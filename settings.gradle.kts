@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "PresentationSampleArchive"
 include(":app")
 include(":benchmark")
+include(":common")

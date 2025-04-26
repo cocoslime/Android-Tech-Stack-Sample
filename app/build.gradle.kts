@@ -109,4 +109,6 @@ dependencies {
     implementation(libs.okhttp.logging)
 
     implementation(libs.androidx.compose.runtime.tracing)
+
+    implementation(project(":common"))
 }
