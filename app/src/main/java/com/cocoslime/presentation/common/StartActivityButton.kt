@@ -15,10 +15,11 @@ fun <T> StartActivityButton(
     activity: Activity,
     clazz: Class<T>,
     buttonText: String,
+    modifier: Modifier = Modifier,
     intentExtraBuilder: ((Intent) -> Unit)? = null,
 ) {
     Button(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth(),
         shape = MaterialTheme.shapes.large,
         onClick = {
