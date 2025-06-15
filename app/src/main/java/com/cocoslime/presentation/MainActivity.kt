@@ -22,14 +22,15 @@ import androidx.compose.ui.unit.dp
 import com.cocoslime.common.CommonConst
 import com.cocoslime.common.CommonConst.HOST_LAZY_COLUMN
 import com.cocoslime.presentation.architecture.orbit.OrbitActivity
+import com.cocoslime.feature.circuit.CircuitActivity
 import com.cocoslime.presentation.common.StartActivityButton
-import com.cocoslime.presentation.common.base.BaseActivity
+import com.cocoslime.common.base.BaseActivity
 import com.cocoslime.presentation.lazylayout.column.LazyColumnActivity
 import com.cocoslime.presentation.navigation.NavigationActivity
 import com.cocoslime.presentation.paging.PagingActivity
 import com.cocoslime.presentation.recyclerview.RecyclerViewActivity
 import com.cocoslime.presentation.viewpager.ViewPagerActivity
-import com.cocoslime.printlnDebug
+import com.cocoslime.common.printlnDebug
 
 class MainActivity : BaseActivity() {
 
@@ -161,6 +162,12 @@ class MainActivity : BaseActivity() {
                     )
                 }
             }
+
+            StartActivityButton(
+                activity = this@MainActivity,
+                clazz = CircuitActivity::class.java,
+                buttonText = "Circuit",
+            )
         }
     }
 }
