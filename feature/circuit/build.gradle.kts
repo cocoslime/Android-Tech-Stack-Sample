@@ -10,7 +10,7 @@ plugins {
 
 android {
     namespace = "com.cocoslime.feature.circuit"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 29
