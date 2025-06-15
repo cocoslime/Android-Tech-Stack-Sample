@@ -4,7 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.cocoslime.data.model.GithubRepoResponse
 import com.cocoslime.data.service.GithubService
-import com.cocoslime.logDebug
+import com.cocoslime.common.logDebug
 
 class GithubRepoPagingSource (
     private val service: GithubService,

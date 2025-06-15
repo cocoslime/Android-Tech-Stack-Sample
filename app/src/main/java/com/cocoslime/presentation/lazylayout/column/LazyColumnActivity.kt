@@ -3,7 +3,6 @@ package com.cocoslime.presentation.lazylayout.column
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
-import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.padding
@@ -21,7 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.testTagsAsResourceId
 import com.cocoslime.presentation.BuildConfig
-import com.cocoslime.presentation.common.base.BaseActivity
+import com.cocoslime.common.base.BaseActivity
 import com.cocoslime.presentation.lazylayout.column.benchmark.BenchmarkLazyColumnScreen
 import com.cocoslime.presentation.lazylayout.column.recomposition.RecompositionLazyColumnScreen
 
