@@ -1,8 +1,7 @@
-package com.cocoslime
+package com.cocoslime.common
 
 import android.net.Uri
 import android.util.Log
-import com.cocoslime.presentation.BuildConfig
 
 fun String.printlnDebug() {
     if (BuildConfig.DEBUG) println(this)

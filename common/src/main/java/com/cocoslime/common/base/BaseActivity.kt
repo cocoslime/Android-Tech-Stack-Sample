@@ -1,4 +1,4 @@
-package com.cocoslime.presentation.common.base
+package com.cocoslime.common.base
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

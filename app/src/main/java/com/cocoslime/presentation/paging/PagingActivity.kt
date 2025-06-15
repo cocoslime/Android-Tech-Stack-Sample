@@ -20,7 +20,7 @@ import com.cocoslime.data.model.GithubRepoResponse
 import com.cocoslime.presentation.databinding.ActivityRecyclerViewBinding
 import com.cocoslime.presentation.databinding.ItemRecyclerViewEntryBinding
 import com.cocoslime.presentation.recyclerview.BindingViewHolder
-import com.cocoslime.printlnDebug
+import com.cocoslime.common.printlnDebug
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

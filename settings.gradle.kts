@@ -23,3 +23,6 @@ rootProject.name = "PresentationSampleArchive"
 include(":app")
 include(":benchmark")
 include(":common")
+
+// Features
+include(":feature:circuit")
