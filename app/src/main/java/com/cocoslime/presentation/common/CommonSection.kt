@@ -25,13 +25,13 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun CommonSection(
     title: String,
-    message: String,
     isTextFieldVisible: Boolean,
     confirmButtonText: String,
     modifier: Modifier = Modifier,
+    message: String? = null,
     onConfirmClick: (String) -> Unit = {}
 ) {
-    var state by remember {
+    var state by remember(title, message) {
         mutableStateOf("")
     }
 
@@ -47,13 +47,15 @@ fun CommonSection(
 
         Spacer(modifier = Modifier.height(6.dp))
 
-        Text(
-            text = message,
-            style = MaterialTheme.typography.headlineMedium
-        )
+        if (message != null) {
+            Text(
+                text = message,
+                style = MaterialTheme.typography.headlineMedium
+            )
 
-        Spacer(modifier = Modifier.height(10.dp))
-
+            Spacer(modifier = Modifier.height(10.dp))
+        }
+        
         if (isTextFieldVisible) {
             TextField(
                 value = state,
@@ -68,6 +70,7 @@ fun CommonSection(
         Button(
             onClick = {
                 onConfirmClick(state)
+                state = ""
             }
         ) {
             Text(confirmButtonText)

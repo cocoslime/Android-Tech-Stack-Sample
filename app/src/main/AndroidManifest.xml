@@ -52,6 +52,9 @@
             android:name=".navigation.activity.SourceNavActivity"
             android:exported="false" />
         <activity
+            android:name=".navigation.activity.BridgeNavActivity"
+            android:exported="false" />
+        <activity
             android:name=".navigation.activity.DestinationNavActivity"
             android:exported="false" />
         <activity

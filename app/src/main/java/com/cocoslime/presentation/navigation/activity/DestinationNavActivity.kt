@@ -57,22 +57,4 @@ class DestinationNavActivity: ComponentActivity() {
         }
     }
 
-    @Parcelize
-    data class RequestData(
-        val message: String
-    ): Parcelable {
-
-        companion object {
-            val EXTRA_KEY = this::class.qualifiedName
-        }
-    }
-
-    @Parcelize
-    data class ResultData(
-        val result: String
-    ): Parcelable {
-        companion object {
-            val EXTRA_KEY = this::class.qualifiedName
-        }
-    }
 }
