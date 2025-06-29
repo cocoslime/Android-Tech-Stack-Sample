@@ -12,11 +12,20 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 
 @InstallIn(SingletonComponent::class)
 @Module
-class NetworkModule {
+object NetworkModule {
+
+    private const val TIME_OUT_SECONDS = 10L
+
+    @Provides
+    @Singleton
+    fun providesNetworkJson(): Json = Json {
+        ignoreUnknownKeys = true
+    }
 
     @Provides
     fun provideOkHttpClientBuilder(): OkHttpClient.Builder {
@@ -31,28 +40,19 @@ class NetworkModule {
     }
 
     @Provides
-    fun provideService(httpClientBuilder: OkHttpClient.Builder): GithubService {
-        val httpClient = httpClientBuilder
+    fun provideGithubService(
+        httpClientBuilder: OkHttpClient.Builder,
+        networkJson: Json,
+    ): GithubService {
+        val httpClient = httpClientBuilder.build()
+
+        return Retrofit.Builder()
+            .baseUrl("https://api.github.com/")
+            .client(httpClient)
+            .addConverterFactory(
+                networkJson.asConverterFactory("application/json; charset=UTF8".toMediaType())
+            )
             .build()
-
-        val converterFactory = Json {
-            ignoreUnknownKeys = true
-        }
-            .asConverterFactory("application/json; charset=UTF8".toMediaType())
-
-        val retrofit =
-            Retrofit.Builder()
-                .baseUrl("https://api.github.com/")
-                .client(httpClient)
-                .addConverterFactory(converterFactory)
-                .build()
-
-        return retrofit
             .create(GithubService::class.java)
-    }
-
-
-    companion object {
-        const val TIME_OUT_SECONDS = 10L
     }
 }

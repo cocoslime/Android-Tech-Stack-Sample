@@ -102,15 +102,10 @@ dependencies {
     implementation(libs.paging.runtime)
     implementation(libs.glide)
 
-    // retrofit and okhttp
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.converter.serialization)
-    implementation(libs.okhttp)
-    implementation(libs.okhttp.logging)
-
     implementation(libs.androidx.compose.runtime.tracing)
 
     implementation(project(":common"))
     implementation(project(":feature:circuit"))
     implementation(project(":domain"))
+    implementation(project(":data"))
 }
