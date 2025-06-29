@@ -10,11 +10,11 @@ plugins {
 }
 
 android {
-    namespace = "com.cocoslime.presentation"
+    namespace = "com.cocoslime.samples.apps.androidtechstack"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.cocoslime.presentation"
+        applicationId = "com.cocoslime.samples.apps.androidtechstack"
         minSdk = 29
         targetSdk = 34
         versionCode = 1
@@ -102,14 +102,10 @@ dependencies {
     implementation(libs.paging.runtime)
     implementation(libs.glide)
 
-    // retrofit and okhttp
-    implementation(libs.retrofit)
-    implementation(libs.retrofit.converter.serialization)
-    implementation(libs.okhttp)
-    implementation(libs.okhttp.logging)
-
     implementation(libs.androidx.compose.runtime.tracing)
 
     implementation(project(":common"))
     implementation(project(":feature:circuit"))
+    implementation(project(":domain"))
+    implementation(project(":data"))
 }

@@ -5,8 +5,8 @@ plugins {
 }
 
 android {
-    namespace = "com.cocoslime.benchmark"
-    compileSdk = 34
+    namespace = "com.cocoslime.samples.apps.androidtechstack.benchmark"
+    compileSdk = 35
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
