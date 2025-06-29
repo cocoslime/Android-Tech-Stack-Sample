@@ -16,7 +16,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.cocoslime.samples.apps.androidtechstack.data.model.GithubRepoResponse
+import com.cocoslime.samples.apps.androidtechstack.domain.model.GithubRepoResponse
 import com.cocoslime.samples.apps.androidtechstack.databinding.ActivityRecyclerViewBinding
 import com.cocoslime.samples.apps.androidtechstack.databinding.ItemRecyclerViewEntryBinding
 import com.cocoslime.samples.apps.androidtechstack.presentation.recyclerview.BindingViewHolder

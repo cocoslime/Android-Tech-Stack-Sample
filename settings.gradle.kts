@@ -26,3 +26,4 @@ include(":common")
 
 // Features
 include(":feature:circuit")
+include(":domain")

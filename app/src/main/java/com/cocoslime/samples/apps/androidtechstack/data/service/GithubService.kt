@@ -1,6 +1,6 @@
 package com.cocoslime.samples.apps.androidtechstack.data.service
 
-import com.cocoslime.samples.apps.androidtechstack.data.model.GithubRepoResponse
+import com.cocoslime.samples.apps.androidtechstack.domain.model.GithubRepoResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

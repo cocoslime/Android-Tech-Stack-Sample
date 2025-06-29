@@ -112,4 +112,5 @@ dependencies {
 
     implementation(project(":common"))
     implementation(project(":feature:circuit"))
+    implementation(project(":domain"))
 }

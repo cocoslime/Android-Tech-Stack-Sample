@@ -1,4 +1,4 @@
-package com.cocoslime.samples.apps.androidtechstack.data.model
+package com.cocoslime.samples.apps.androidtechstack.domain.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

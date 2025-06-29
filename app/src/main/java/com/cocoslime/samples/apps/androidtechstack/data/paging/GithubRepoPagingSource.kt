@@ -2,7 +2,7 @@ package com.cocoslime.samples.apps.androidtechstack.data.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.cocoslime.samples.apps.androidtechstack.data.model.GithubRepoResponse
+import com.cocoslime.samples.apps.androidtechstack.domain.model.GithubRepoResponse
 import com.cocoslime.samples.apps.androidtechstack.data.service.GithubService
 import com.cocoslime.samples.apps.androidtechstack.common.logDebug
 
