@@ -37,7 +37,7 @@ class XmlDestinationFragment : Fragment() {
                             findNavController()
                                 .previousBackStackEntry
                                 ?.savedStateHandle
-                                ?.set(com.cocoslime.samples.apps.androidtechstack.presentation.navigation.fragment.xml.XmlDestinationFragment.Companion.KEY_RESULT, it)
+                                ?.set(KEY_RESULT, it)
                             findNavController().popBackStack(
                                 destinationId = R.id.sourceFragment,
                                 inclusive = false,

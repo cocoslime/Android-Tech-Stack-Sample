@@ -1,4 +1,4 @@
-package com.cocoslime.samples.apps.androidtechstack.presentation
+package com.cocoslime.samples.apps.androidtechstack
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

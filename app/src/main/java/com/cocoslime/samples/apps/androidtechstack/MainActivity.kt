@@ -1,4 +1,4 @@
-package com.cocoslime.samples.apps.androidtechstack.presentation
+package com.cocoslime.samples.apps.androidtechstack
 
 import android.content.Intent
 import android.net.Uri
@@ -31,6 +31,7 @@ import com.cocoslime.samples.apps.androidtechstack.presentation.paging.PagingAct
 import com.cocoslime.samples.apps.androidtechstack.presentation.recyclerview.RecyclerViewActivity
 import com.cocoslime.samples.apps.androidtechstack.presentation.viewpager.ViewPagerActivity
 import com.cocoslime.samples.apps.androidtechstack.common.printlnDebug
+import androidx.core.net.toUri
 
 class MainActivity : BaseActivity() {
 
@@ -79,10 +80,10 @@ class MainActivity : BaseActivity() {
                 uriString
             }
 
-            Uri.parse(normalizedUri)
+            normalizedUri.toUri()
         } catch (e: Exception) {
             // 예외 발생 시 기본 Uri 반환
-            Uri.parse(CommonConst.SCHEME)
+            CommonConst.SCHEME.toUri()
         }
     }
 
