@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/sourceFragment"
         android:label="SourceFragment"
-        android:name="com.cocoslime.presentation.navigation.fragment.xml.XmlSourceFragment">
+        android:name="com.cocoslime.samples.apps.androidtechstack.presentation.navigation.fragment.xml.XmlSourceFragment">
 
         <action
             android:id="@+id/action_sourceFragment_to_destinationFragment"
@@ -18,11 +18,11 @@
     <fragment
         android:id="@+id/destinationFragment"
         android:label="DestinationFragment"
-        android:name="com.cocoslime.presentation.navigation.fragment.xml.XmlDestinationFragment">
+        android:name="com.cocoslime.samples.apps.androidtechstack.presentation.navigation.fragment.xml.XmlDestinationFragment">
 
         <argument
             android:name="data"
-            app:argType="com.cocoslime.presentation.navigation.fragment.xml.XmlDestinationArgs"
+            app:argType="com.cocoslime.samples.apps.androidtechstack.presentation.navigation.fragment.xml.XmlDestinationArgs"
             app:nullable="true"/>
     </fragment>
 </navigation>

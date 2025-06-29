@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.cocoslime.common"
+    namespace = "com.cocoslime.samples.apps.androidtechstack.common"
     compileSdk = 35
 
     defaultConfig {

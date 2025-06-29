@@ -10,11 +10,11 @@ plugins {
 }
 
 android {
-    namespace = "com.cocoslime.presentation"
+    namespace = "com.cocoslime.samples.apps.androidtechstack"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.cocoslime.presentation"
+        applicationId = "com.cocoslime.samples.apps.androidtechstack"
         minSdk = 29
         targetSdk = 34
         versionCode = 1

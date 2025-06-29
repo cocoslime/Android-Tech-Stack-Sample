@@ -9,7 +9,7 @@ plugins {
 }
 
 android {
-    namespace = "com.cocoslime.feature.circuit"
+    namespace = "com.cocoslime.samples.apps.androidtechstack.feature.circuit"
     compileSdk = 35
 
     defaultConfig {

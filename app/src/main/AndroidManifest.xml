@@ -18,7 +18,7 @@
     </queries>
 
     <application
-        android:name=".MainApplication"
+        android:name=".presentation.MainApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -33,7 +33,7 @@
             tools:targetApi="29" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
             android:screenOrientation="portrait">
@@ -46,46 +46,46 @@
 
         <!-- Navigation -->
         <activity
-            android:name=".navigation.NavigationActivity"
+            android:name=".presentation.navigation.NavigationActivity"
             android:exported="false" />
         <activity
-            android:name=".navigation.activity.SourceNavActivity"
+            android:name=".presentation.navigation.activity.SourceNavActivity"
             android:exported="false" />
         <activity
-            android:name=".navigation.activity.BridgeNavActivity"
+            android:name=".presentation.navigation.activity.BridgeNavActivity"
             android:exported="false" />
         <activity
-            android:name=".navigation.activity.DestinationNavActivity"
+            android:name=".presentation.navigation.activity.DestinationNavActivity"
             android:exported="false" />
         <activity
-            android:name=".navigation.compose.ComposeNavActivity"
+            android:name=".presentation.navigation.compose.ComposeNavActivity"
             android:exported="false" />
         <activity
-            android:name=".navigation.fragment.dsl.FragmentNavActivity"
+            android:name=".presentation.navigation.fragment.dsl.FragmentNavActivity"
             android:exported="false" />
         <activity
-            android:name=".navigation.fragment.xml.XmlFragmentNavActivity"
+            android:name=".presentation.navigation.fragment.xml.XmlFragmentNavActivity"
             android:exported="false" />
 
         <!-- RecyclerView -->
         <activity
-            android:name=".recyclerview.RecyclerViewActivity"
+            android:name=".presentation.recyclerview.RecyclerViewActivity"
             android:exported="false" />
 
         <!-- ViewPager -->
-        <activity android:name=".viewpager.ViewPagerActivity"
+        <activity android:name=".presentation.viewpager.ViewPagerActivity"
             android:exported="false" />
 
         <!-- Orbit -->
-        <activity android:name=".architecture.orbit.OrbitActivity"
+        <activity android:name=".presentation.architecture.orbit.OrbitActivity"
             android:exported="false" />
 
         <!-- Paging3 -->
-        <activity android:name=".paging.PagingActivity"
+        <activity android:name=".presentation.paging.PagingActivity"
             android:exported="false" />
 
         <!-- LazyColumn -->
-        <activity android:name=".lazylayout.column.LazyColumnActivity"
+        <activity android:name=".presentation.lazylayout.column.LazyColumnActivity"
             android:exported="false" />
     </application>
 
