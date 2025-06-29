@@ -46,7 +46,6 @@ import kotlinx.collections.immutable.toImmutableList
 
 private const val TAG = "RecompositionTest"
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun RecompositionLazyColumnScreen(
     modifier: Modifier = Modifier,
@@ -97,7 +96,9 @@ fun RecompositionLazyColumnScreen(
                 }
 
                 Button(onClick = {
-                    data.shuffled()
+                    val shuffled = data.shuffled()
+                    data.clear()
+                    data.addAll(shuffled)
                 }) {
                     Text("Shuffle")
                 }
