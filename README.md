@@ -28,7 +28,6 @@ and [DestinationActivity](https://github.com/cocoslime/Android-Navigation-Sample
 ## Architecture
 ### MVI with [Orbit](https://orbit-mvi.org/)
 
-
 ## Dependencies
 - Navigation
 - Jetpack Compose
